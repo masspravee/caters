@@ -1,0 +1,236 @@
+.content_box {
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  background-color: gray;
+  display: flex;
+}
+
+.content,
+.new {
+  display: flex;
+  width: 50%;
+  margin: auto;
+  border-radius: 10%;
+  position: relative;
+}
+
+.content{
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+
+.loginContainer,
+.noticeContainer {
+  min-height: 450px;
+
+  width: 50%;
+  background-color: red;
+  border: 1px solid black;
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.new .noticeContainer {
+  order: 2;
+}
+
+.loginContainer .head {
+  height: 15%;
+  text-align: center;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  text-align: center;
+  font-size: 25px;
+  
+}
+
+
+.loginContainer .errorMsg{
+  display: block;
+  margin: auto;
+  color: white;
+  line-height: 10px;
+}
+
+.loginContainer .inner {
+  flex: 1;
+  height: 70%;
+}
+
+.loginContainer .social {
+  width: 60%;
+  margin: auto;
+
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.loginContainer .icon {
+  height: 40px;
+  cursor: pointer;
+}
+
+.loginContainer .inner span {
+  display: block;
+  text-align: center;
+  line-height: 50px;
+}
+
+.input_group {
+  height: 10%;
+  width: 100%;
+  position: relative;
+  margin-bottom: 35px;
+}
+
+
+
+.hover_input {
+  display: block;
+  height: 40px;
+  width: 70%;
+  margin: auto;
+  padding-left: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px; /* Adjust as needed */
+}
+
+.hover_label {
+  position: absolute;
+  text-transform: capitalize;
+  top: 12px; /* Adjust vertical position */
+  left: 18%; /* Adjust horizontal position */
+  color: #aaa; /* Initial label color */
+  font-size: 16px; /* Adjust as needed */
+  transition: transform 0.3s ease-out, color 0.3s ease-out; /* Smooth transition */
+  pointer-events: none;
+}
+
+.hover_input:focus + .hover_label,
+.hover_input:not(:placeholder-shown) + .hover_label {
+  display: block;
+  padding: 5px 5px 0 5px;
+  background-color: white;
+  transform: translate(-10%, -100%) scale(0.8); /* Adjust the transformation values */
+  color: red; /* Adjust label color on focus */
+  border-radius: 10px;
+}
+
+.loginContainer .button_group {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button_group button {
+  display: block;
+  width: 70%;
+  margin: auto;
+  height: 40px;
+  border-radius: 8px;
+  border: 0.5px solid black;
+  color: white;
+  background-color: rgb(56, 56, 240);
+  font-size: 18px;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.button_group span {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* notice */
+
+.notice {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-left: none;
+  position: relative;
+}
+
+.notice_box {
+  max-height: 90%;
+  width: 90%;
+  text-align: center;
+}
+
+.notice_box h3,
+.notice_box span {
+  text-transform: capitalize;
+  line-height: 300%;
+  color: white;
+}
+
+.notice_box h3 {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.notice_box span {
+  display: block;
+}
+
+.notice_box button {
+  padding: 10px 50px;
+  background-color: skyblue;
+  border-radius: 8px;
+  border: 0.5px solid black;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+  text-transform: capitalize;
+}
+
+@media (max-width: 800px) {
+  .content , .new{
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hover_input,
+  .button_group button {
+    width: 50%;
+  }
+
+  .hover_label{
+    padding-left:0 ;
+    left: 13%;
+  }
+
+  .content , .new {
+    width: 80%;
+  }
+
+  .loginContainer {
+    flex: 1;
+  }
+
+  .noticeContainer {
+    display: none;
+  }
+
+  .hover_input,
+  .button_group button {
+    width: 80%;
+  }
+}

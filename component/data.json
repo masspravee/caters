@@ -1,0 +1,27 @@
+{
+  "first": {
+    "text1": "Welcome To WeCaters",
+    "text2": "A startUp company for catering services",
+    "text3": "Celebrate your funtions without any stress"
+  },
+  "second": {
+    "text1": "Delight in Every Bite: Your Event, Our Expertise",
+    "text2": "Savor the flavor",
+    "text3": "Where every bite tells a story"
+  },
+  "third": {
+    "text1": "Elevate Your Events with Our Exquisite Catering",
+    "text2": "Taste the Difference: Unforgettable Catering Experiences",
+    "text3": "Crafting Culinary Memories, One Dish at a Time"
+  },
+  "four": {
+    "text1": "Savor the Flavor: Unleash Your Event's Potential",
+    "text2": "Where Every Bite is a Celebration",
+    "text3": "Turning Moments into Memories with Our Cuisine"
+  },
+  "five": {
+    "text1": "Experience the Art of Catering with [Your Brand Name]",
+    "text2": "Your Event, Our Passion: The Perfect Pairing",
+    "text3": "From Our Kitchen to Your Occasion: Culinary Excellence"
+  }
+}

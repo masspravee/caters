@@ -1,0 +1,74 @@
+.inner{
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    background-color: rgb(23, 46, 39);
+    display: flex;
+    overflow-x: scroll;
+}
+
+
+.inner h1{
+    text-align: center;
+    line-height: 70px;
+}
+
+.inner .sideBar{
+    flex: 1;
+}
+
+.inner .blog{
+    flex: 2;
+    background-color: gray;
+    position: relative;
+}
+
+
+.inner .blog .post{
+    height: max-content;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 1rem;
+    background-color: orange;
+}
+
+.inner .blog .post header{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+
+.inner .blog .post header h2{
+    line-height: 50px;
+    margin-left: 1rem;
+}
+
+.inner .blog .post header img{
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    border: 3px solid #000;
+
+}
+
+.inner .blog .post .content{
+    height: max-content;
+    width: 100%;
+}
+
+.inner .blog .post .content img{
+    height: 100%;
+    width: 100%;
+}
+
+
+.inner .blog .post footer{
+
+}
+
+
+.inner .blog .post footer .username{
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+

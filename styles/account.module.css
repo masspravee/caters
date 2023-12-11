@@ -1,0 +1,116 @@
+.account {
+  position: relative;
+  top: 80px;
+  min-height: calc(100vh - 80px);
+  width: 100vw;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background-color: gray;
+  min-height: 70vh;
+  width: 40vw;
+  margin: auto;
+  position: relative;
+  text-transform: capitalize;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: black 2px 2px 10px;
+}
+
+.card h1 {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 28px;
+  font-weight: 500;
+  color: rgb(38, 34, 34);
+}
+
+.card .profile_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+
+
+.hideImage{
+  display: none;
+  color: white;
+}
+
+.card img {
+  border-radius: 100%;
+  border: 2px solid rgb(238, 221, 221);
+  height: 85px;
+  width: 85px;
+  margin-left: 10%;
+}
+
+.card .select_image {
+  transform: translate(-20px, 20px);
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  background-color: rgb(28, 54, 137);
+  border-radius: 100%;
+  pointer-events: none;
+}
+
+.data_container {
+  margin-top: 0.5rem;
+}
+
+.data {
+  padding: 10px;
+}
+
+.data label {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  display: block;
+}
+
+.data input {
+  width: 90%;
+  height: 30px;
+  font-size: 18px;
+  padding-left: 0.3rem;
+}
+
+.data .icon {
+  width: 10%;
+}
+
+.data_container button {
+  width: 90%;
+  margin: auto;
+  display: block;
+  height: 40px;
+  background-color: skyblue;
+  border-radius: 8px;
+  border: 1px solid #000;
+  font-size: 18px;
+  margin-top: 1.5rem;
+}
+
+.data_container button:hover {
+  background-color: lightblue;
+  color: white;
+}
+
+@media (max-width: 800px) {
+  .card {
+    width: 60vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    width: 80vw;
+  }
+}

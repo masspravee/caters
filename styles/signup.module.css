@@ -1,0 +1,97 @@
+.signUpContainer{
+    min-height:550px;
+    background-color: red;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.signUpContainer header {
+    flex: 1;
+    height: 15%;
+    text-align: center;
+    padding: 10px;
+    text-transform: capitalize;
+}
+
+.signUpContainer header h4{
+  font-weight: 600;  
+  font-size: 25px;
+}
+
+
+.signUpContainer header .errorMsg{
+    line-height: 40px;
+    color: white;
+}
+
+.signUpContainer .inner{
+    flex: 1;
+    height: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signUpContainer .social{
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+
+
+.signUpContainer .social .icon{
+    height: 40px;
+}
+
+
+.signUpContainer .labelText{
+    line-height: 50px;
+}
+
+.signUpContainer .input_container{
+    width: 100%;
+}
+
+.signUpContainer footer{
+    
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.signUpContainer footer button{
+    width: 80%;
+    display: block;
+    width: 70%;
+    margin: auto;
+    height: 40px;
+    border-radius: 8px;
+    border: 0.5px solid black;
+    color: white;
+    background-color: rgb(56, 56, 240);
+    font-size: 18px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+
+
+
+@media (max-width: 600px) {
+    
+  
+    .signUpContainer {
+      flex: 1;
+    }
+
+  }
+  
