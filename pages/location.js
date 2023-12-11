@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect, useRef } from "react";
 import InputBox from "@/component/inputBox";
-import styles from "/styles/home.module.css";
+import styles from "/styles/Home.module.css";
 export default function Home({ data }) {
   const AllStates = Object.keys(data);
   const [currentState, setCurrentState] = useState(null);
