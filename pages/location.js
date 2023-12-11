@@ -1,3 +1,4 @@
+/*
 import React, { Component, useState, useEffect, useRef } from "react";
 import InputBox from "@/component/inputBox";
 import styles from "/styles/Home.module.css";
@@ -66,11 +67,7 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps() {
-  const apiUrl =
-    process.env.NODE_ENV === "production"
-      ? "caters-fs1d-ns0piqae8-masspravee.vercel.app/api/cities"
-      : "http://localhost:3000/api/cities";
-  const res = await fetch(apiUrl);
+  const res = await fetch("http://localhost:3000/api/cities");
   const cityData = await res.json();
 
   return {
@@ -79,3 +76,6 @@ export async function getStaticProps() {
     },
   };
 }
+
+
+*/
