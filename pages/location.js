@@ -79,3 +79,5 @@ export async function getStaticProps() {
 
 
 */
+
+export default function Location() {}
