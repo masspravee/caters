@@ -22,7 +22,7 @@ export default function Blog({ jsonRes }) {
 export async function getStaticProps() {
   const apiUrl =
     process.env.NODE_ENV === "production"
-      ? "caters-fs1d-ns0piqae8-masspravee.vercel.app/api/post"
+      ? "caters-hvx9.vercel.app/api/post"
       : "http://localhost:3000/api/post";
 
   const response = await fetch(apiUrl);
