@@ -66,7 +66,11 @@ export default function Home({ data }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/cities");
+  const apiUrl =
+    process.env.NODE_ENV === "production"
+      ? "caters-fs1d-ns0piqae8-masspravee.vercel.app/api/cities"
+      : "http://localhost:3000/api/cities";
+  const res = await fetch(apiUrl);
   const cityData = await res.json();
 
   return {
