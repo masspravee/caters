@@ -37,3 +37,21 @@
     line-height: 50px;
 
   }
+
+  .message{
+    position: absolute;
+    top: 0px;
+    left: 40%;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+    background-color: gray;
+  }
+
+.message .icon {
+  padding: 10px 20px;
+}
+
+  .message > *{
+    line-height: 40px;
+  }

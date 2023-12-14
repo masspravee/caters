@@ -13,5 +13,7 @@ export default async (req, res) => {
     } catch (e) {
       res.json({ message: "error caught" });
     }
+  } else {
+    res.status(400).json({ error: "error caught" });
   }
 };

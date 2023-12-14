@@ -8,6 +8,7 @@ import {
   faCaretRight,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
+import MessagePopup from "@/component/messagePopup";
 import { useRouter } from "next/router";
 import SendData from "@/component/sendData";
 export default function CreatePost() {
@@ -20,6 +21,7 @@ export default function CreatePost() {
   const [showImage, setShowImage] = useState(null);
   const [count, setCount] = useState(0);
   const [caption, setCaption] = useState(null);
+  const [popupError, setPopupError] = useState(null);
 
   const handleImage = (event) => {
     var files = Array.from(event.target.files);
@@ -86,14 +88,29 @@ export default function CreatePost() {
     });
   };
 
+  const getPage = () => {
+    try {
+      let renderData = JSON.parse(localStorage.getItem("login-cred"));
+      setUserName(renderData.username);
+      setShowImage(renderData.photoUrl);
+    } catch (err) {
+      if (err.message === "renderData is null") {
+        setPopupError("You Need to Login to continue");
+        setTimeout(function () {
+          navi.push("/welcome");
+        }, 5000);
+      }
+    }
+  };
+
   useEffect(() => {
-    let renderData = JSON.parse(localStorage.getItem("login-cred"));
-    setUserName(renderData.username);
-    setShowImage(renderData.photoUrl);
+    getPage();
   }, []);
 
   return (
     <div className="container">
+      {popupError ? <MessagePopup message={popupError} /> : null}
+
       <div className={style.inner_container}>
         <div className={style.post}>
           <header className={style.header}>
