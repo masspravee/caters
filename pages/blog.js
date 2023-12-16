@@ -34,7 +34,7 @@ export default function Blog({ data }) {
 }
 
 export async function getStaticProps() {
-  const response = await fetch(`${process.env.VERCEL_URL}/api/post`);
+  const response = await fetch(`https://${process.env.VERCEL_URL}/api/post`);
   const res = await response.json();
   console.log(res.message);
   return {
