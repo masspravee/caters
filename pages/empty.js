@@ -6,6 +6,7 @@ export default function Empty() {
       process.env.NODE_ENV == "production"
         ? `${process.env.VERCEL_URL}/api/empty`
         : "http://localhost:3000/api/empty";
+    console.log(apiUrl);
     const response = await fetch(apiUrl);
     const res = await response.json();
     setDummy(res.message);
