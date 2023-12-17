@@ -3,7 +3,7 @@ import Post from "@/component/post";
 import React, { useState, useEffect } from "react";
 import GetRequest from "@/component/getRequest";
 
-export default function Blog({ data }) {
+export default function Blog() {
   const [response, setResponse] = useState(null);
 
   const resquest = async () => {
@@ -12,7 +12,7 @@ export default function Blog({ data }) {
   };
 
   useEffect(() => {
-    //resquest();
+    resquest();
   }, []);
 
   return (
@@ -21,8 +21,8 @@ export default function Blog({ data }) {
         <div className={style.sideBar}></div>
         <div className={style.blog}>
           <h1>Blog</h1>
-          {data
-            ? data.map((value, index) => {
+          {response
+            ? response.map((value, index) => {
                 return <Post data={value} key={index} />;
               })
             : null}
@@ -33,6 +33,7 @@ export default function Blog({ data }) {
   );
 }
 
+/*
 export async function getStaticProps() {
   const apiUrl =
     process.env.NODE_ENV !== "production"
@@ -40,9 +41,8 @@ export async function getStaticProps() {
       : "http://localhost:3000/api/post";
   const response = await fetch(apiUrl);
   const res = await response.json();
-  console.log(process.env.VERCEL_URL);
 
   return {
     props: { data: res.message },
   };
-}
+}*/
