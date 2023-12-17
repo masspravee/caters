@@ -4,7 +4,7 @@ export default function Empty() {
   const getter = async () => {
     const apiUrl =
       process.env.NODE_ENV == "production"
-        ? `${process.env.VERCEL_URL}/api/empty`
+        ? `${VERCEL_URL}/api/empty`
         : "http://localhost:3000/api/empty";
     console.log(apiUrl);
     const response = await fetch(apiUrl);
