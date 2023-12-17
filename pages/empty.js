@@ -9,7 +9,7 @@ export default function Empty({ data }) {
 export async function getStaticProps() {
   const apiUrl =
     process.env.NODE_ENV == "production"
-      ? "https://caters.vercel.app/api/empty"
+      ? `${process.env.VERCEL_URL}/api/empty`
       : "http://localhost:3000/api/empty";
   const response = await fetch(apiUrl);
   const res = await response.json();
