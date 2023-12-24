@@ -16,9 +16,9 @@ export default function SideBar({ data }) {
       setSearch(value);
       console.log(userNames);
       var suggestions = userNames.filter((singleData) =>
-        singleData.includes(value)
+        singleData.toLowerCase().includes(value)
       );
-      console.log(suggestions);
+
       setResults(suggestions);
     } else {
       setResults(null);

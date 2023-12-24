@@ -74,7 +74,7 @@ export default function CreatePost() {
     );
     if (res.message == "success") {
       setResponse("post Created Successfully");
-
+      console.log(res);
       navi.push("blog");
     } else {
       setResponse("post Failed");
