@@ -13,21 +13,21 @@
 }
 
 .inner .sideBar{
-    flex: 2;
-    height: 100%;
+    width: 30%;
+    height: 100vh;
 }
 
 .inner .blog{
-    flex: 3;
     background-color: gray;
     position: relative;
-    width: 50%;
+    width: 70%;
+    height: 100%;
 }
 
 
 .inner .blog .post{
     height: max-content;
-    width: 90%;
+    width: 70%;
     margin: auto;
     margin-bottom: 1rem;
     background-color: orange;
@@ -58,12 +58,31 @@
 .inner .blog .post .content{
     height: max-content;
     width: 100%;
+    position: relative;
 }
 
 .inner .blog .post .content img{
     height: 100%;
     width: 100%;
     border-radius: 5px;
+}
+
+.inner .blog .post .content .slideLeft, .slideRight{
+    position: absolute;
+    top: 45%;
+    border: 0.5px solid rgb(60, 59, 59);
+    background-color: white;
+    border-radius: 4px;
+    padding: 2px;
+   
+}
+
+.slideLeft{
+    left: 1%;
+}
+
+.slideRight {
+right: 1%;
 }
 
 
@@ -82,13 +101,12 @@
 
     .inner .sideBar {
 
-       flex: 1;
+
         width: 10%;
     }
     .inner .blog{
  
         width: 80%;
-       flex: 10;
         margin: auto;
         display: block;
     }
@@ -99,11 +117,16 @@
 @media (max-width: 500px) {
     .inner .blog{
         flex: 1;
-        width: 85%;
+        width: 100%;
         background-color: yellow;
         margin: auto;
         display: block;
     }
+
+    .inner .blog .post{
+        width: 90%;
+    }
+
     .inner .sideBar {
         display: none ;
     }

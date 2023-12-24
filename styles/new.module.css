@@ -1,6 +1,4 @@
-
 .inner_container {
- 
   position: absolute;
   height: 100%;
   width: 100%;
@@ -21,6 +19,9 @@
   transition: transform 0.5s ease-in-out;
 }
 
+
+
+
 .notice,
 .login {
   width: 50%;
@@ -30,20 +31,17 @@
   align-items: center;
 }
 
-.notice{
-  
+.notice {
 }
-.login{
- 
+.login {
 }
 
-
-.login .social{
-    width: 60%;
-    margin: auto;
-    margin-bottom: 1rem;
-    display: flex;
-    justify-content: space-around;
+.login .social {
+  width: 60%;
+  margin: auto;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-around;
 }
 
 .login .icon {
@@ -56,16 +54,39 @@
   cursor: pointer;
 }
 
-.login header h2 {
-  text-align: center;
-  text-transform: capitalize;
-  
-  line-height: 50px;
+
+
+
+.login .header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.login header h3{
-    text-align: center;
- line-height: 50px;
+.login .header span {
+  text-transform: capitalize;
+  line-height: 50px;
+  font-size: 22px;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  cursor: not-allowed;
+}
+
+.login .header .secondSpanWord {
+  text-decoration: underline;
+  margin-bottom: 10px;
+  text-decoration-skip-ink: none;
+  cursor: pointer;
+}
+
+.login .header .secondSpan,
+.login .header .secondSpanWord {
+  display: none;
+}
+
+.login header h3 {
+  text-align: center;
+  line-height: 50px;
 }
 
 .inner_loginbox {
@@ -78,8 +99,6 @@
   width: 100%;
 }
 
-
-
 .input_container input {
   display: block;
   width: 85%;
@@ -91,7 +110,7 @@
   padding-left: 5px;
 }
 
-.input_container input::placeholder{
+.input_container input::placeholder {
   text-transform: capitalize;
 }
 
@@ -101,15 +120,14 @@
   line-height: 40px;
 }
 
-.login .retype{
-    color :red;
-    display: block;
-    width: 80%;
-    margin: auto;
-    line-height: 20px;
-    margin-top: -0.5rem;
-    margin-bottom: 0.5rem;
-    
+.login .retype {
+  color: red;
+  display: block;
+  width: 80%;
+  margin: auto;
+  line-height: 20px;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .login .footer {
@@ -119,7 +137,8 @@
   width: 100%;
 }
 
-.login .footer button , .notice .footer button {
+.login .footer button,
+.notice .footer button {
   width: 90%;
   height: 40px;
   text-transform: uppercase;
@@ -127,47 +146,46 @@
   border: 1px solid black;
 }
 
+.notice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.notice{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    text-align: center;
+  text-align: center;
 }
 
-
-.notice .inner_notice{
-    padding: 20px;
+.notice .inner_notice {
+  padding: 20px;
 }
 
-.notice .inner_notice h2{
-    margin: 1rem;
+.notice .inner_notice h2 {
+  margin: 1rem;
 }
 
-.notice .inner_notice span{
-    display: block;
-    line-height: 35px;
-    margin: 1rem;
+.notice .inner_notice span {
+  display: block;
+  line-height: 35px;
+  margin: 1rem;
 }
 
-
-@media(max-width:800px){
-  .box_container{
+@media (max-width: 800px) {
+  .box_container {
     width: 80%;
   }
 }
 
-@media(max-width:600px){
-  .box_container{
+@media (max-width: 600px) {
+  .box_container {
     width: 90%;
   }
   .notice {
-    display: none ;
-
+    display: none;
   }
-  .login{
+  .login {
     flex: 1;
   }
+  .login .header .secondSpan,
+.login .header .secondSpanWord{
+  display: block;
 }
-
+}

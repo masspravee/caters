@@ -1,0 +1,27 @@
+.sideBar{
+background-color: white;
+min-height: 100%;
+}
+
+
+.sideBar h2{
+    
+    text-align: center;
+    line-height: 50px;
+}
+
+.sideBar input{
+    display: block;
+    margin: auto;
+    height: 40px;
+    width: 70%;
+    font-size: 20px;
+}
+
+.sideBar ul > li{
+
+}
+
+.sideBar li{
+    display: block;
+}

@@ -4,14 +4,15 @@ import React, { Component, useState, useEffect } from "react";
 import SendData from "./sendData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
-
-export default function SignUpBox({ changeState, setDataForServer }) {
+import { useRouter } from "next/router";
+export default function SignUpBox({ changeState }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [contact, setContact] = useState(null);
   const [retype, setRetype] = useState(null);
   const [error, setError] = useState(null);
   const [passCheck, setPassCheck] = useState(null);
+  const navi = useRouter();
   // phone number disalbled
   useEffect(() => {
     if (password && retype) {
@@ -34,18 +35,31 @@ export default function SignUpBox({ changeState, setDataForServer }) {
     } else {
       dataToServer.phone = contact;
     }
-
-    //console.log(dataToServer);
     var res = await SendData("/signup", dataToServer);
     setError(res.message);
+    setTimeout(() => {
+      navi.push("/blog");
+    }, 3000);
+  };
+
+  const handleState = () => {
+    changeState((prev) => !prev);
   };
 
   return (
     <div className={style.login}>
       <div className={style.inner_loginbox}>
         <header>
-          <h2>sign up</h2>
-          <h3 className={style.errorMsg}>{error}</h3>
+          <div className={style.header}>
+            <span className={style.firstSpan}>SignUp</span>
+            <span className={style.secondSpan}>/</span>
+            <span className={style.secondSpanWord} onClick={handleState}>
+              Login
+            </span>
+          </div>
+          <div>
+            <h3 className={style.errorMsg}>{error}</h3>
+          </div>
         </header>
         <div className={style.inner_content}>
           <div className={style.social}>

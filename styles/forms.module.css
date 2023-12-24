@@ -1,0 +1,48 @@
+
+
+.form_container {
+    min-height: calc(100vh - 80px);
+    width: 100vw;
+     background-color: pink;
+  }
+
+  .form_container .form{
+    height: 80%;
+    width: 50%;
+    margin: auto;
+    padding-top: 2rem;
+  }
+
+  .form_container .form .input_group > *{
+      display: block;
+  }
+
+  .form_container .form h1{
+    text-align: center;
+  }
+
+
+  .input_group label{
+    line-height:40px;
+    text-transform: capitalize;
+    word-spacing: 2px;
+    font-size: 18px;
+  }
+
+  .input_group input{
+    height: 35px;
+    width: 90%;
+    font-size: 22px;
+  }
+  
+
+  .input_group input[type="file"]{
+    height: 30px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .form{
+        min-width: 90%;
+    }
+  }

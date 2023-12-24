@@ -5,7 +5,7 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import AccountInput from "@/component/accountInput";
 import SendData from "@/component/sendData";
 import GetRequest from "@/component/getRequest";
-
+import { defaultImage } from "@/component/smallComponents";
 export default function Account() {
   const [loginCred, setLoginCred] = useState(null);
   const [username, setUserName] = useState("");
@@ -15,11 +15,6 @@ export default function Account() {
   const [image, setImage] = useState({ file: [] });
   const [imageChange, setImageChange] = useState(false);
   const [showImage, setShowImage] = useState(null);
-
-  const defualtImage = (name) => {
-    var url = `https://ui-avatars.com/api/?name=${name}&size=200&background=random&color=fff&bold=true`;
-    return url;
-  };
 
   const handleImage = (event) => {
     var file = event.target.files[0];
@@ -81,7 +76,7 @@ export default function Account() {
           />
           <label htmlFor="image">
             <img
-              src={showImage ? showImage : defualtImage(username)}
+              src={showImage ? showImage : defaultImage(username)}
               referrerPolicy="no-referrer"
             ></img>
           </label>

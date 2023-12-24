@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import MessagePopup from "@/component/messagePopup";
 import { useRouter } from "next/router";
+import { defaultImage } from "@/component/smallComponents";
 import SendData from "@/component/sendData";
 export default function CreatePost() {
   const navi = useRouter();
@@ -92,6 +93,7 @@ export default function CreatePost() {
     try {
       let renderData = JSON.parse(localStorage.getItem("login-cred"));
       setUserName(renderData.username);
+
       setShowImage(renderData.photoUrl);
     } catch (err) {
       if (err.message === "renderData is null") {
@@ -119,7 +121,10 @@ export default function CreatePost() {
           </header>
           <form className={style.content} onSubmit={submitPost}>
             <div className={style.content_header}>
-              <img src={showImage} className={style.profile}></img>
+              <img
+                src={showImage ? showImage : defaultImage(username)}
+                className={style.profile}
+              ></img>
               <h3>{username}</h3>
             </div>
             <div className={style.content_box}>

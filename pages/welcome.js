@@ -23,11 +23,11 @@ export default function Welcome() {
                 name={"sign in"}
                 msg={"Log in to continue your delicious journey with us"}
               />
-              <LoginBox />
+              <LoginBox changeState={setButtonState} />
             </>
           ) : (
             <>
-              <SignUpBox></SignUpBox>
+              <SignUpBox changeState={setButtonState}></SignUpBox>
               <Notice
                 changeState={setButtonState}
                 title={"Welcome to Caters"}

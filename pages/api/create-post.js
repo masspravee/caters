@@ -3,7 +3,7 @@ import uploadImage from "@/component/uploadImage";
 const fs = require("fs");
 import { firestore } from "@/config";
 import moment from "moment";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export const config = {
   api: {
@@ -44,7 +44,7 @@ const post = async (req, res) => {
       const promiseUrl = filesKey.map(async (file, index) => {
         var singleUrl = await saveFile(files[file][0]);
 
-        return { [index]: singleUrl };
+        return singleUrl;
       });
 
       var resolvedUrl = await Promise.all(promiseUrl);
