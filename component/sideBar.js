@@ -18,6 +18,7 @@ export default function SideBar({ data }) {
       var suggestions = userNames.filter((singleData) =>
         singleData.includes(value)
       );
+      console.log(suggestions);
       setResults(suggestions);
     } else {
       setResults(null);
