@@ -24,6 +24,7 @@ export default async (req, res) => {
           uid: uid,
           photoUrl: "",
           phone: "",
+          bio: "",
         };
 
         await setDoc(doc(firestore, "users", uid), reDefinedData);

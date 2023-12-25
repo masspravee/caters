@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import style from "/styles/account.module.css";
+import Loading from "@/component/loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import AccountInput from "@/component/accountInput";
@@ -7,11 +8,15 @@ import SendData from "@/component/sendData";
 import GetRequest from "@/component/getRequest";
 import { defaultImage } from "@/component/smallComponents";
 export default function Account() {
-  const [loginCred, setLoginCred] = useState(null);
-  const [username, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [change, setChange] = useState(false);
+  const [loginCred, setLoginCred] = useState({
+    username: "",
+    email: "",
+    phone: "",
+    bio: "",
+    uid: "",
+  });
+
+  const [loader, setLoader] = useState(false);
   const [image, setImage] = useState({ file: [] });
   const [imageChange, setImageChange] = useState(false);
   const [showImage, setShowImage] = useState(null);
@@ -24,33 +29,22 @@ export default function Account() {
     setImageChange((prev) => !prev);
   };
 
-  const handler = async () => {
-    setLoginCred((prev) => {
-      return {
-        ...prev,
-        ["username"]: username,
-        ["email"]: email,
-        ["phone"]: phone,
-      };
-    });
-    setChange(true);
+  const handler = async (event) => {
+    event.preventDefault();
+    setLoader(true);
+
+    const response = await SendData("/update-user", loginCred);
+    console.log(response);
+    setLoader(false);
   };
 
   useEffect(() => {
     let renderData = JSON.parse(localStorage.getItem("login-cred"));
     setLoginCred(renderData);
-    setUserName(renderData.username);
-    setEmail(renderData.email);
-    setPhone(renderData.phone);
     setShowImage(renderData.photoUrl);
   }, []);
 
   useEffect(() => {
-    if (change) {
-      console.log("chnaging");
-      SendData("/update-user", loginCred);
-      setChange(false);
-    }
     if (imageChange) {
       console.log("image-change");
 
@@ -60,11 +54,12 @@ export default function Account() {
       SendData("/profile", form, "multipart/form-data", false);
       setImageChange((prev) => !prev);
     }
-  }, [change, imageChange]);
+  }, [imageChange]);
 
   return (
     <div className={style.account}>
-      <div className={style.card}>
+      {loader ? <Loading /> : null}
+      <form onSubmit={handler} className={style.card}>
         <h1>Your profile</h1>
         <div className={style.profile_container}>
           <input
@@ -76,7 +71,7 @@ export default function Account() {
           />
           <label htmlFor="image">
             <img
-              src={showImage ? showImage : defaultImage(username)}
+              src={showImage ? showImage : defaultImage(loginCred.username)}
               referrerPolicy="no-referrer"
             ></img>
           </label>
@@ -89,25 +84,33 @@ export default function Account() {
 
         <div className={style.data_container}>
           <AccountInput
-            name={"username"}
-            initialValue={username}
-            changeState={setUserName}
+            label_name={"username"}
+            initialValue={loginCred.username}
+            changeState={setLoginCred}
           />
           <AccountInput
-            name={"email"}
-            initialValue={email}
-            changeState={setEmail}
+            label_name={"email"}
+            initialValue={loginCred.email}
+            changeState={setLoginCred}
             editable={false}
           />
           <AccountInput
-            name={"phone"}
-            initialValue={phone}
-            changeState={setPhone}
+            label_name={"phone"}
+            initialValue={loginCred.phone}
+            changeState={setLoginCred}
             placeholder="No phone number"
           />
-          <button onClick={handler}>Save Info</button>
+          <AccountInput
+            label_name={"bio"}
+            initialValue={loginCred.bio}
+            changeState={setLoginCred}
+            placeholder="Nothing here"
+            noSpace={false}
+          />
+
+          <button type="submit">Save Info</button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

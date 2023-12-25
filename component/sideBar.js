@@ -14,7 +14,7 @@ export default function SideBar({ data }) {
     var value = event.target.value;
     if (value != "") {
       setSearch(value);
-      console.log(userNames);
+
       var suggestions = userNames.filter((singleData) =>
         singleData.toLowerCase().includes(value)
       );
@@ -36,7 +36,11 @@ export default function SideBar({ data }) {
             {!results
               ? null
               : results.map((resultValue) => {
-                  return <li>{resultValue}</li>;
+                  return (
+                    <a href={`/users/${resultValue}`}>
+                      <li key={resultValue}>{resultValue}</li>
+                    </a>
+                  );
                 })}
           </ul>
         </div>

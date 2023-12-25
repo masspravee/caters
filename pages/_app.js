@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps }) {
   const navi = useRouter();
   const getCred = async () => {
-    var res = await GetRequest("/login-cred");
+    let res = await GetRequest("/login-cred");
 
     if (!res.error) {
       var message = res.message;

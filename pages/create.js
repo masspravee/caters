@@ -1,5 +1,6 @@
 import style from "/styles/create-post.module.css";
 import React, { Component, useState, useEffect } from "react";
+// file not uploaded on production
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileImage,
@@ -8,6 +9,7 @@ import {
   faCaretRight,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
+import Loading from "@/component/loading";
 import MessagePopup from "@/component/messagePopup";
 import { useRouter } from "next/router";
 import { defaultImage } from "@/component/smallComponents";
@@ -23,6 +25,7 @@ export default function CreatePost() {
   const [count, setCount] = useState(0);
   const [caption, setCaption] = useState(null);
   const [popupError, setPopupError] = useState(null);
+  const [loader, setLoader] = useState(false);
 
   const handleImage = (event) => {
     var files = Array.from(event.target.files);
@@ -57,27 +60,31 @@ export default function CreatePost() {
 
   const submitPost = async (event) => {
     event.preventDefault();
+    if (!loader) {
+      setLoader(true);
 
-    const dataToServer = new FormData();
+      const dataToServer = new FormData();
 
-    dataToServer.append("caption", caption);
-    image.map((file, index) => {
-      dataToServer.append(`file${index}`, file);
-      dataToServer.append("username", username);
-    });
+      dataToServer.append("caption", caption);
+      image.map((file, index) => {
+        dataToServer.append(`file${index}`, file);
+        dataToServer.append("username", username);
+      });
 
-    var res = await SendData(
-      "/create-post",
-      dataToServer,
-      "multipart/form-data",
-      false
-    );
-    if (res.message == "success") {
-      setResponse("post Created Successfully");
-      console.log(res);
-      navi.push("blog");
-    } else {
-      setResponse("post Failed");
+      var res = await SendData(
+        "/create-post",
+        dataToServer,
+        "multipart/form-data",
+        false
+      );
+      if (res.message == "success") {
+        setLoader(false);
+        setResponse("post Created Successfully");
+        console.log(res);
+        navi.push("blog");
+      } else {
+        setResponse("post Failed");
+      }
     }
   };
 
@@ -111,6 +118,7 @@ export default function CreatePost() {
 
   return (
     <div className="container">
+      {loader ? <Loading /> : null}
       {popupError ? <MessagePopup message={popupError} /> : null}
 
       <div className={style.inner_container}>

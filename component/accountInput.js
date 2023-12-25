@@ -1,17 +1,24 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useRef, useEffect } from "react";
 import style from "/styles/account.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faCheck } from "@fortawesome/free-solid-svg-icons";
 export default function AccountInput({
-  name,
+  label_name,
   initialValue,
   changeState,
   editable = true,
   placeholder = "",
+  noSpace = true,
 }) {
   const [edit, setEdit] = useState(true);
-  const setState = (e) => {
-    changeState(e.target.value);
+  const currentInput = useRef(null);
+  const setState = (event) => {
+    let { name, value } = event.target;
+    if (!value.includes(" ")) {
+      changeState((prev) => ({ ...prev, [name]: value }));
+    } else {
+      alert("please Dont add spaces");
+    }
   };
   const changeEdit = () => {
     if (editable) {
@@ -19,14 +26,22 @@ export default function AccountInput({
     }
   };
 
+  useEffect(() => {
+    if (!edit) {
+      currentInput.current.focus();
+    }
+  }, [edit]);
+
   return (
     <div className={style.data}>
-      <label>{name}</label>
+      <label>{label_name}</label>
       <input
         disabled={edit}
         value={initialValue}
         onChange={setState}
         placeholder={placeholder}
+        name={label_name}
+        ref={currentInput}
       />
       {edit ? (
         <FontAwesomeIcon
