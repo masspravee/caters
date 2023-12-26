@@ -5,41 +5,45 @@ import SendData from "./sendData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useRouter } from "next/router";
-export default function SignUpBox({ changeState }) {
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [contact, setContact] = useState(null);
-  const [retype, setRetype] = useState(null);
-  const [error, setError] = useState(null);
+import Loading from "./loading";
+export default function SignUpBox({ changeState, response, responseState }) {
+  const [userCred, setUserCred] = useState({
+    username: "",
+    email: "",
+    password: "",
+    retype: "",
+  });
+  const [loader, setLoader] = useState(false);
+
   const [passCheck, setPassCheck] = useState(null);
   const navi = useRouter();
   // phone number disalbled
   useEffect(() => {
-    if (password && retype) {
-      if (password != retype) {
+    if (userCred.password && userCred.retype) {
+      if (userCred.password != userCred.retype) {
         setPassCheck("* password should be same");
       } else {
         setPassCheck(null);
       }
     }
-  }, [retype, password]);
+  }, [userCred]);
 
   const handler = async (event) => {
     event.preventDefault();
-    var dataToServer = {
-      username: username,
-      password: password,
-    };
-    if (isNaN(contact)) {
-      dataToServer.email = contact;
-    } else {
-      dataToServer.phone = contact;
-    }
+    var dataToServer = userCred;
+    delete dataToServer.retype;
+    setLoader(true);
     var res = await SendData("/signup", dataToServer);
-    setError(res.message);
+    setLoader(false);
+    responseState(res.message);
     setTimeout(() => {
       navi.push("/blog");
     }, 3000);
+  };
+
+  const handleInput = (event) => {
+    var { name, value } = event.target;
+    setUserCred((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleState = () => {
@@ -48,6 +52,7 @@ export default function SignUpBox({ changeState }) {
 
   return (
     <div className={style.login}>
+      {loader ? <Loading /> : null}
       <div className={style.inner_loginbox}>
         <header>
           <div className={style.header}>
@@ -58,7 +63,7 @@ export default function SignUpBox({ changeState }) {
             </span>
           </div>
           <div>
-            <h3 className={style.errorMsg}>{error}</h3>
+            <h3 className={style.errorMsg}>{response}</h3>
           </div>
         </header>
         <div className={style.inner_content}>
@@ -66,7 +71,7 @@ export default function SignUpBox({ changeState }) {
             <FontAwesomeIcon
               className={style.icon}
               icon={faGoogle}
-              onClick={() => loginMethod("google", setError)}
+              onClick={() => loginMethod("google", responseState)}
             />
             <FontAwesomeIcon className={style.icon} icon={faFacebookF} />
           </div>
@@ -76,27 +81,31 @@ export default function SignUpBox({ changeState }) {
           <form className={style.input_container} onSubmit={handler}>
             <input
               placeholder="enter username"
-              onChange={(e) => setUsername(e.target.value)}
+              name="username"
+              onChange={handleInput}
               required={true}
             />
             <input
               placeholder="enter email"
               type="email"
-              onChange={(e) => setContact(e.target.value)}
+              name="email"
+              onChange={handleInput}
               required={true}
             />
 
             <input
               placeholder="enter password"
+              name="password"
               minLength={8}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleInput}
               required={true}
             />
             <label className={style.retype}>{passCheck}</label>
             <input
               placeholder="retype password"
+              name="retype"
               minLength={8}
-              onChange={(e) => setRetype(e.target.value)}
+              onChange={handleInput}
               required={true}
             />
             <div className={style.footer}>

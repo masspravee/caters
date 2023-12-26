@@ -37,8 +37,8 @@ export default function SideBar({ data }) {
               ? null
               : results.map((resultValue) => {
                   return (
-                    <a href={`/users/${resultValue}`}>
-                      <li key={resultValue}>{resultValue}</li>
+                    <a href={`/users/${resultValue}`} key={resultValue}>
+                      <li>{resultValue}</li>
                     </a>
                   );
                 })}

@@ -4,19 +4,22 @@ import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import SendData from "./sendData";
 import React, { Component, useState } from "react";
 import loginMethod from "./method";
+import Loading from "./loading";
 import { useRouter } from "next/router";
-export default function LoginBox({ changeState }) {
+export default function LoginBox({ changeState, responseState, response }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [error, setError] = useState(null);
   const navi = useRouter();
+  const [loader, setLoader] = useState(false);
 
   const handler = async (event) => {
     event.preventDefault();
     const data = { email: email, password: password };
+    setLoader(true);
     var res = await SendData("login", data);
-    console.log(res.message);
-    setError(res.message);
+    setLoader(false);
+
+    responseState(res.message);
     setTimeout(() => {
       navi.push("/blog");
     }, 3000);
@@ -28,6 +31,7 @@ export default function LoginBox({ changeState }) {
 
   return (
     <div className={style.login}>
+      {loader ? <Loading /> : null}
       <div className={style.inner_loginbox}>
         <header>
           <div className={style.header}>
@@ -38,7 +42,7 @@ export default function LoginBox({ changeState }) {
             </span>
           </div>
           <div>
-            <h3 className={style.errorMsg}>{error}</h3>
+            <h3 className={style.errorMsg}>{response}</h3>
           </div>
         </header>
         <div className={style.inner_content}>
@@ -46,7 +50,7 @@ export default function LoginBox({ changeState }) {
             <FontAwesomeIcon
               className={style.icon}
               icon={faGoogle}
-              onClick={() => loginMethod("google", setError)}
+              onClick={() => loginMethod("google", responseState)}
             />
             <FontAwesomeIcon className={style.icon} icon={faFacebookF} />
           </div>
