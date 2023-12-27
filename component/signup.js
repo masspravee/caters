@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import Loading from "./loading";
 export default function SignUpBox({ changeState, response, responseState }) {
   const [userCred, setUserCred] = useState({
-    username: "",
+    displayName: "",
     email: "",
     password: "",
     retype: "",
@@ -37,7 +37,7 @@ export default function SignUpBox({ changeState, response, responseState }) {
     setLoader(false);
     responseState(res.message);
     setTimeout(() => {
-      navi.push("/blog");
+      navi.push("/info");
     }, 3000);
   };
 
@@ -80,8 +80,8 @@ export default function SignUpBox({ changeState, response, responseState }) {
           </div>
           <form className={style.input_container} onSubmit={handler}>
             <input
-              placeholder="enter username"
-              name="username"
+              placeholder="enter displayName"
+              name="displayName"
               onChange={handleInput}
               required={true}
             />

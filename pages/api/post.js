@@ -19,7 +19,6 @@ export default async function (req, res) {
     for (let i = 0; i < allDocs.length; i++) {
       for (let j = 0; j < allUserData.length; j++) {
         if (allDocs[i].uid === allUserData[j].uid) {
-          console.log(allUserData[j].uid, allDocs[i].uid);
           var tempData = { ...allDocs[i], profileUrl: allUserData[j].photoUrl };
           newRefinedData.push(tempData);
         }

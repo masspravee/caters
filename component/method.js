@@ -16,11 +16,13 @@ export default async function loginMethod(platform, changeState) {
     try {
       signInWithPopup(auth, googleProvider).then(async (data) => {
         let dataToSend = {
-          username: data.user.displayName,
+          displayName: data.user.displayName,
           email: data.user.email,
           uid: data.user.uid,
           photoUrl: data.user.photoURL,
           phone: "",
+          bio: "",
+          username: "",
         };
         var res = await SendData("popupLogin", dataToSend);
         changeState(res.message);

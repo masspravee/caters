@@ -12,19 +12,20 @@ export default async (req, res) => {
   const data = JSON.parse(req.body);
 
   if ("email" in data) {
-    const { email, password, username } = data;
+    console.log(data);
+    const { email, password, displayName } = data;
     console.log(data);
     await createUserWithEmailAndPassword(auth, email, password)
       .then(async (cred) => {
         var { uid } = cred.user;
-        var photo = `https://ui-avatars.com/api/?name=${username}&size=200&background=random&color=fff&bold=true`;
         const reDefinedData = {
-          username: username,
+          displayName: displayName,
           email: email,
           uid: uid,
           photoUrl: "",
           phone: "",
           bio: "",
+          username: "",
         };
 
         await setDoc(doc(firestore, "users", uid), reDefinedData);

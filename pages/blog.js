@@ -9,20 +9,6 @@ export default function Blog({ data }) {
   const [response, setResponse] = useState(data.message);
   const [sideBarData, setSidebarData] = useState(data.allUserData);
 
-  /**
-
-  const resquest = async () => {
-    var data = await GetRequest("/post");
-    setResponse(data.message);
-    setSidebarData(data.allUserData);
-  };
-
-  useEffect(() => {
-    resquest();
-  }, []);
-
-   */
-
   return (
     <div className="container">
       <div className={style.inner}>
@@ -37,6 +23,7 @@ export default function Blog({ data }) {
               })
             : null}
         </div>
+        <div className={style.sideBar}></div>
       </div>
     </div>
   );

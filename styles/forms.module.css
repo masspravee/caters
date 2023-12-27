@@ -4,13 +4,15 @@
     min-height: calc(100vh - 80px);
     width: 100vw;
      background-color: pink;
+     display: flex;
   }
 
   .form_container .form{
     height: 80%;
     width: 50%;
     margin: auto;
-    padding-top: 2rem;
+    padding: 30px;
+    background-color: gray;
   }
 
   .form_container .form .input_group > *{
@@ -31,7 +33,7 @@
 
   .input_group input{
     height: 35px;
-    width: 90%;
+    width: 100%;
     font-size: 22px;
   }
   
@@ -46,3 +48,4 @@
         min-width: 90%;
     }
   }
+

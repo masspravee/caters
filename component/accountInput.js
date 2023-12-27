@@ -14,11 +14,8 @@ export default function AccountInput({
   const currentInput = useRef(null);
   const setState = (event) => {
     let { name, value } = event.target;
-    if (!value.includes(" ")) {
-      changeState((prev) => ({ ...prev, [name]: value }));
-    } else {
-      alert("please Dont add spaces");
-    }
+
+    changeState((prev) => ({ ...prev, [name]: value }));
   };
   const changeEdit = () => {
     if (editable) {
