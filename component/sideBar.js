@@ -2,11 +2,13 @@ import style from "/styles/sideBar.module.css";
 import React, { useState } from "react";
 export default function SideBar({ data }) {
   const [provider, setProvider] = useState(data ? data : []);
+
   const userNames = provider
-    .filter((single) => single.username != undefined)
+    .filter((single) => single != undefined)
     .map((single) => {
-      return single.username != undefined ? single.username : "";
+      return single != undefined ? single : "";
     });
+  console.log(userNames);
   const [search, setSearch] = useState(null);
   const [results, setResults] = useState(null);
 
@@ -38,7 +40,7 @@ export default function SideBar({ data }) {
               : results.map((resultValue) => {
                   return (
                     <a href={`/users/${resultValue}`} key={resultValue}>
-                      <li>{resultValue}</li>
+                      <li>@{resultValue}</li>
                     </a>
                   );
                 })}

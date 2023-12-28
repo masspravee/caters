@@ -1,134 +1,179 @@
-.inner{
-    min-height: calc(100vh - 80px);
-    width: 100%;
-    background-color: rgb(23, 46, 39);
-    display: flex;
-    overflow-x: scroll;
+.inner {
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  background-color: rgb(23, 46, 39);
+  display: flex;
+  overflow-x: scroll;
 }
 
-
-.inner h1{
-    text-align: center;
-    line-height: 70px;
+.inner h1 {
+  text-align: center;
+  line-height: 70px;
 }
 
-.inner .sideBar{
-    width: 30%;
-    height: 100vh;
+.inner .sideBar {
+  width: 30%;
+  height: 100vh;
 }
 
-.inner .blog{
-    background-color: gray;
-    position: relative;
-    width: 70%;
-    height: 100%;
+.inner .blog {
+  background-color: gray;
+  position: relative;
+  width: 70%;
+  height: 100%;
 }
 
-
-.inner .blog .post{
-    height: max-content;
-    width: 70%;
-    margin: auto;
-    margin-bottom: 1rem;
-    background-color: orange;
-    border-radius: 8px;
-    padding: 10px;
+.inner .blog .post {
+  height: max-content;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 1rem;
+  background-color: orange;
+  border-radius: 8px;
+  padding: 10px;
 }
 
-.inner .blog .post header{
-    display: flex;
-    padding: 5px;
-    align-items: center;
+.inner .blog .post header {
+  display: flex;
+  padding: 5px;
+  align-items: center;
 }
 
-.inner .blog .post header h2{
-    line-height: 40px;
-    margin-left: 1rem;
+.inner .blog .post header h2 {
+  line-height: 40px;
+  margin-left: 1rem;
 }
 
-.inner .blog .post header img{
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
-    border: 3px solid #000;
-    
-
+.inner .blog .post header img {
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  border: 3px solid #000;
 }
 
-.inner .blog .post .content{
-    height: max-content;
-    width: 100%;
-    position: relative;
+.inner .blog .post .content {
+  height: max-content;
+  width: 100%;
+  position: relative;
 }
 
-.inner .blog .post .content img{
-    height: 100%;
-    width: 100%;
-    border-radius: 5px;
+.inner .blog .post .content img {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
 }
 
-.inner .blog .post .content .slideLeft, .slideRight{
-    position: absolute;
-    top: 45%;
-    border: 0.5px solid rgb(60, 59, 59);
-    background-color: white;
-    border-radius: 4px;
-    padding: 2px;
-   
+.inner .blog .post .content .slideLeft,
+.slideRight {
+  position: absolute;
+  top: 45%;
+  border: 0.5px solid rgb(60, 59, 59);
+  background-color: white;
+  border-radius: 4px;
+  padding: 2px;
 }
 
-.slideLeft{
-    left: 1%;
+.slideLeft {
+  left: 1%;
 }
 
 .slideRight {
-right: 1%;
+  right: 1%;
 }
 
-
-.inner .blog .post footer{
-
+.inner .blog .post footer {
 }
 
-
-.inner .blog .post footer .username{
-    font-weight: 700;
-    margin-right: 10px;
+.inner .blog .post footer .username {
+  font-weight: 700;
+  margin-right: 10px;
 }
-
 
 @media (max-width: 800px) {
-
-    .inner .sideBar {
-
-
-        width: 10%;
-    }
-    .inner .blog{
- 
-        width: 80%;
-        margin: auto;
-        display: block;
-    }
-   
+  .inner .sideBar {
+    width: 10%;
+  }
+  .inner .blog {
+    width: 80%;
+    margin: auto;
+    display: block;
+  }
 }
 
-
 @media (max-width: 500px) {
-    .inner .blog{
-        flex: 1;
-        width: 100%;
-        background-color: yellow;
-        margin: auto;
-        display: block;
-    }
+  .inner .blog {
+    flex: 1;
+    width: 100%;
+    background-color: yellow;
+    margin: auto;
+    display: block;
+  }
 
-    .inner .blog .post{
-        width: 90%;
-    }
+  .inner .blog .post {
+    width: 90%;
+  }
 
-    .inner .sideBar {
-        display: none ;
-    }
+  .inner .sideBar {
+    display: none;
+  }
+}
+
+.profile {
+  height: 100%;
+  width: 100%;
+
+  padding: 30px 50px;
+}
+
+.profile .account {
+  min-height: 100px;
+  height: 100px;
+  max-height: 200px;
+  background-color: gray;
+  display: flex;
+}
+
+.profile .account .left {
+  display: block;
+  margin-right: 2rem;
+}
+.profile .account .left img {
+  border-radius: 50%;
+  width: 75px;
+}
+.profile .account .right {
+}
+
+.profile .account .right h2 {
+  line-height: 40px;
+  font-weight: 500;
+}
+.profile .account .right h3 {
+  line-height: 40px;
+}
+.profile .account .right span {
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.profile .posts {
+    width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.profile .posts .item {
+    flex: 0 0 calc(30% - 5px);
+    margin: 5px;
+  height: 250px;
+  display: block;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.profile .posts .item img{
+    width: 100%;
+    height: 100%;
 }
 

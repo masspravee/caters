@@ -13,12 +13,6 @@ export default function Welcome() {
   const [response, setResponse] = useState(null);
 
   useEffect(() => {
-    if (response != null) {
-      navi.push("/blog");
-    }
-  }, [response]);
-
-  useEffect(() => {
     setResponse(null);
   }, [buttonState]);
 

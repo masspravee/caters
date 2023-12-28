@@ -89,7 +89,7 @@ export default function Account() {
         </div>
 
         <div className={style.data_container}>
-          <h1>@{loginCred.username}</h1>
+          <h2>@{loginCred.username}</h2>
           <AccountInput
             label_name={"username"}
             initialValue={loginCred.displayName}

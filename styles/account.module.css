@@ -21,7 +21,8 @@
   box-shadow: black 2px 2px 10px;
 }
 
-.card h1 {
+.card h1 , .card h2 {
+  text-transform: none;
   text-align: center;
   padding: 10px 0;
   font-size: 28px;

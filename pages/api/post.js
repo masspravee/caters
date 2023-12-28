@@ -11,20 +11,20 @@ export default async function (req, res) {
       return doc.data();
     });
     const allUserData = userFetchedData.docs.map((doc) => {
-      return doc.data();
+      return doc.data().username;
     });
 
-    var newRefinedData = [];
+    let newRefinedData = [];
 
     for (let i = 0; i < allDocs.length; i++) {
       for (let j = 0; j < allUserData.length; j++) {
         if (allDocs[i].uid === allUserData[j].uid) {
           var tempData = { ...allDocs[i], profileUrl: allUserData[j].photoUrl };
           newRefinedData.push(tempData);
+          console.log(tempData);
         }
       }
     }
-    console.log(newRefinedData);
 
     res.json({ message: newRefinedData, allUserData: allUserData });
   } catch (err) {
