@@ -29,7 +29,7 @@ export default function Blog({ data }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const apiUrl =
     process.env.NODE_ENV === "production"
       ? `https://caters.vercel.app/api/post`
