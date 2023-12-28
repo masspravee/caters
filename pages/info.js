@@ -1,7 +1,9 @@
 import style from "/styles/forms.module.css";
 import React, { Component, useState, useEffect } from "react";
 import SendData from "@/component/sendData";
+import { useRouter } from "next/router";
 export default function Info() {
+  const navi = useRouter();
   const [username, setUsername] = useState(null);
   const [bio, setBio] = useState(null);
   const [error, setError] = useState(null);
@@ -13,7 +15,12 @@ export default function Info() {
     };
     if (EvaluateUsername(username)) {
       const response = await SendData("/info", data);
-      console.log(response);
+      if (response.message) {
+        setError(response.message);
+        navi.push("/account");
+      } else {
+        setError(response.error);
+      }
     } else {
       setError("Invalid username Type");
     }

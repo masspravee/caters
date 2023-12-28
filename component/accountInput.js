@@ -8,7 +8,6 @@ export default function AccountInput({
   changeState,
   editable = true,
   placeholder = "",
-  noSpace = true,
 }) {
   const [edit, setEdit] = useState(true);
   const currentInput = useRef(null);
@@ -34,7 +33,7 @@ export default function AccountInput({
       <label>{label_name}</label>
       <input
         disabled={edit}
-        value={initialValue}
+        value={initialValue ? initialValue : ""}
         onChange={setState}
         placeholder={placeholder}
         name={label_name}

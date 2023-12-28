@@ -133,7 +133,7 @@ export default function CreatePost() {
                 src={showImage ? showImage : defaultImage(username)}
                 className={style.profile}
               ></img>
-              <h3>{username}</h3>
+              <h3>@{username}</h3>
             </div>
             <div className={style.content_box}>
               <textarea

@@ -12,7 +12,7 @@ export default async function (req, res) {
   });
   userData.map((user) => {
     if (user.username === username) {
-      res.json({ message: "User already exists" });
+      res.json({ error: "User already exists" });
     }
   });
 
@@ -20,6 +20,6 @@ export default async function (req, res) {
     username: username,
     bio: bio,
   }).then(() => {
-    res.json({ message: "changes made" });
+    res.json({ message: "Username set" });
   });
 }

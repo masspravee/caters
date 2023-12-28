@@ -29,6 +29,10 @@ export default function Account() {
     setImageChange((prev) => !prev);
   };
 
+  const errorImageHandler = () => {
+    setShowImage(defaultImage(loginCred.username));
+  };
+
   const handler = async (event) => {
     event.preventDefault();
     setLoader(true);
@@ -42,6 +46,7 @@ export default function Account() {
     let renderData = JSON.parse(localStorage.getItem("login-cred"));
     setLoginCred(renderData);
     setShowImage(renderData.photoUrl);
+    console.log(renderData);
   }, []);
 
   useEffect(() => {
@@ -73,6 +78,7 @@ export default function Account() {
             <img
               src={showImage ? showImage : defaultImage(loginCred.username)}
               referrerPolicy="no-referrer"
+              onError={errorImageHandler}
             ></img>
           </label>
 
@@ -83,9 +89,10 @@ export default function Account() {
         </div>
 
         <div className={style.data_container}>
+          <h1>@{loginCred.username}</h1>
           <AccountInput
             label_name={"username"}
-            initialValue={loginCred.username}
+            initialValue={loginCred.displayName}
             changeState={setLoginCred}
           />
           <AccountInput
@@ -105,7 +112,6 @@ export default function Account() {
             initialValue={loginCred.bio}
             changeState={setLoginCred}
             placeholder="Nothing here"
-            noSpace={false}
           />
 
           <button type="submit">Save Info</button>
