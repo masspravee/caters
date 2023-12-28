@@ -24,6 +24,7 @@ export default async function (req, res) {
         }
       }
     }
+    console.log(newRefinedData);
 
     res.json({ message: newRefinedData, allUserData: allUserData });
   } catch (err) {
