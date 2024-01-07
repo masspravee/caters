@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import style from "/styles/blog.module.css";
 import SideBar from "@/component/sideBar";
-import SendData from "@/component/sendData";
+import { defaultImage } from "@/component/smallComponents";
+import post from "../api/post";
 export default function Profile({ userData, userPosts, sideBarData }) {
-  const [userDetails, setUserDetails] = useState(userData);
-  console.log(userPosts);
+  const userDetails = userData;
+
   return (
     <div className="container">
       <div className={style.inner}>
@@ -15,12 +16,33 @@ export default function Profile({ userData, userPosts, sideBarData }) {
           <div className={style.profile}>
             <div className={style.account}>
               <div className={style.left}>
-                <img src={userDetails.photoUrl}></img>
+                <img
+                  src={
+                    userDetails.photoUrl
+                      ? userDetails.photoUrl
+                      : defaultImage(userDetails.username)
+                  }
+                ></img>
               </div>
               <div className={style.right}>
-                <h2>@{userDetails.username}</h2>
+                <span className={style.displayName}>
+                  @{userDetails.username}
+                </span>
+                <button>Follow</button>
+                <div className={style.infos}>
+                  <span>{userPosts.length}posts</span>
+                  <span>10 following</span>
+                </div>
                 <h3>{userDetails.displayName}</h3>
-                <span>{userDetails.bio}</span>{" "}
+                <span>{userDetails.bio}</span>
+                <div className={style.contact}>
+                  <span>contact - {userDetails.email}</span>
+                  <span>
+                    {userDetails.phone
+                      ? `contact - ${userDetails.phone}`
+                      : null}
+                  </span>
+                </div>
               </div>
             </div>
             <ul className={style.posts}>

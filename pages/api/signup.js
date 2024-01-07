@@ -1,7 +1,7 @@
 import { app } from "@/config";
 import { firestore } from "@/config";
 import { getAuth } from "firebase/auth";
-import { setDoc, getDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithPhoneNumber,
@@ -13,7 +13,7 @@ export default async (req, res) => {
 
   if ("email" in data) {
     console.log(data);
-    const { email, password, displayName } = data;
+    const { email, password, displayName, client } = data;
     console.log(data);
     await createUserWithEmailAndPassword(auth, email, password)
       .then(async (cred) => {
@@ -22,6 +22,7 @@ export default async (req, res) => {
           displayName: displayName,
           email: email,
           uid: uid,
+          client: client,
           photoUrl: "",
           phone: "",
           bio: "",
@@ -38,10 +39,18 @@ export default async (req, res) => {
           sameSite: "none",
           secure: "true",
         });
-        res.json({ message: "account created" });
+        setCookie("caterClient", client, {
+          req,
+          res,
+          maxAge: new Date(Date.now() + 900000),
+          httpOnly: false,
+          sameSite: "none",
+          secure: "true",
+        });
+        res.json({ message: "account created", data: reDefinedData });
       })
       .catch((error) => {
-        res.json({ message: error.code });
+        res.json({ error: error.code });
       });
   }
 };

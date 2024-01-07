@@ -2,7 +2,7 @@ import { firestore } from "@/config";
 import { doc, updateDoc, getDocs, collection } from "firebase/firestore";
 
 export default async function (req, res) {
-  const { catersProfId } = req.cookies;
+  const { catersProfId, caterClient } = req.cookies;
   const { username, bio } = JSON.parse(req.body);
   console.log(username, bio);
   const users = collection(firestore, "users");

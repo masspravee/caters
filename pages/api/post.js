@@ -10,8 +10,13 @@ export default async function (req, res) {
     const allDocs = data.docs.map((doc) => {
       return doc.data();
     });
+
     const allUserData = userFetchedData.docs.map((doc) => {
-      return doc.data().username;
+      return doc.data();
+    });
+
+    const allUsernames = allUserData.map((data) => {
+      return data.username;
     });
 
     let newRefinedData = [];
@@ -21,13 +26,12 @@ export default async function (req, res) {
         if (allDocs[i].uid === allUserData[j].uid) {
           var tempData = { ...allDocs[i], profileUrl: allUserData[j].photoUrl };
           newRefinedData.push(tempData);
-          console.log(tempData);
         }
       }
     }
 
-    res.json({ message: newRefinedData, allUserData: allUserData });
+    res.json({ postData: newRefinedData, allUsernames: allUsernames });
   } catch (err) {
-    res.json({ message: "error" });
+    res.json({ error: "error" });
   }
 }

@@ -17,12 +17,10 @@ export default function PopUp({ stateChange }) {
       </div>
       <div className={style.header}>
         <h1>Welcome </h1>
-        <span>Hello</span>
       </div>
 
       <div className={style.content}>
-        <a href="#">Customer</a>
-        <a href="#">Cater</a>
+        <span>Login To Experience Every Features</span>
       </div>
     </div>
   );

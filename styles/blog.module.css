@@ -4,6 +4,7 @@
   background-color: rgb(23, 46, 39);
   display: flex;
   overflow-x: scroll;
+  position: relative;
 }
 
 .inner h1 {
@@ -13,14 +14,14 @@
 
 .inner .sideBar {
   width: 30%;
-  height: 100vh;
+  min-height: 100%;
 }
 
 .inner .blog {
   background-color: gray;
   position: relative;
   width: 70%;
-  height: 100%;
+  min-height: 100%;
 }
 
 .inner .blog .post {
@@ -35,20 +36,25 @@
 
 .inner .blog .post header {
   display: flex;
-  padding: 5px;
-  align-items: center;
+  padding: 10px 0px;
 }
 
 .inner .blog .post header h2 {
-  line-height: 40px;
+  margin-top: 0.5rem;
   margin-left: 1rem;
+  font-size: 18px;
+}
+
+.inner .blog .post header h2 a {
+  color: rgb(50, 49, 49);
+  text-decoration: none;
 }
 
 .inner .blog .post header img {
   height: 55px;
   width: 55px;
   border-radius: 50%;
-  border: 3px solid #000;
+  border: 3px solid #373636;
 }
 
 .inner .blog .post .content {
@@ -67,10 +73,10 @@
 .slideRight {
   position: absolute;
   top: 45%;
-  border: 0.5px solid rgb(60, 59, 59);
-  background-color: white;
+  
+  color: coral;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   border-radius: 4px;
-  padding: 2px;
 }
 
 .slideLeft {
@@ -82,6 +88,8 @@
 }
 
 .inner .blog .post footer {
+  
+  margin-top: 1rem;
 }
 
 .inner .blog .post footer .username {
@@ -118,17 +126,18 @@
   }
 }
 
+/* profile page */
+
 .profile {
   height: 100%;
   width: 100%;
-
   padding: 30px 50px;
 }
 
 .profile .account {
-  min-height: 100px;
-  height: 100px;
-  max-height: 200px;
+  min-height: 150px;
+  max-height: 300px;
+  margin-bottom: 1rem;
   background-color: gray;
   display: flex;
 }
@@ -144,36 +153,46 @@
 .profile .account .right {
 }
 
-.profile .account .right h2 {
+.profile .account .right .displayName {
   line-height: 40px;
   font-weight: 500;
+  font-size: 25px;
+  margin-right: 1rem;
+  text-transform: none;
+}
+
+.profile .account .right button {
+  padding: 0px 10px;
+  font-size: 18px;
+  font-weight: 600;
 }
 .profile .account .right h3 {
   line-height: 40px;
 }
 .profile .account .right span {
-  text-transform: capitalize;
   font-weight: 400;
 }
 
+.profile .account .right .contact span {
+  display: block;
+}
+
 .profile .posts {
-    width: 100%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .profile .posts .item {
-    flex: 0 0 calc(30% - 5px);
-    margin: 5px;
+  flex: 0 0 calc(30% - 5px);
+  margin: 5px;
   height: 250px;
   display: block;
   background-color: white;
   border: 1px solid black;
 }
 
-.profile .posts .item img{
-    width: 100%;
-    height: 100%;
+.profile .posts .item img {
+  width: 100%;
+  height: 100%;
 }
-

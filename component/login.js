@@ -2,8 +2,9 @@ import style from "/styles/new.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import SendData from "./sendData";
-import React, { Component, useState } from "react";
+import React, { useContext, useState } from "react";
 import loginMethod from "./method";
+import { NavBarProvider } from "@/pages/_app";
 import Loading from "./loading";
 import { useRouter } from "next/router";
 export default function LoginBox({ changeState, responseState, response }) {
@@ -11,6 +12,7 @@ export default function LoginBox({ changeState, responseState, response }) {
   const [password, setPassword] = useState(null);
   const navi = useRouter();
   const [loader, setLoader] = useState(false);
+  const [dirs, setDirs] = useContext(NavBarProvider);
 
   const handler = async (event) => {
     event.preventDefault();
@@ -19,10 +21,32 @@ export default function LoginBox({ changeState, responseState, response }) {
     var res = await SendData("login", data);
     setLoader(false);
 
-    responseState(res.message);
-    setTimeout(() => {
-      navi.push("/blog");
-    }, 3000);
+    if (res.message && res.data) {
+      responseState(res.message);
+      var jsonData = JSON.stringify(res.data);
+      if (res.data.client) {
+        setDirs([
+          { route: "blog", textName: "blog" },
+          { route: "/client/services", textName: "services" },
+          { route: "/client/create", textName: "create" },
+          { route: "/about", textName: "about" },
+          { route: "/account", textName: "account" },
+        ]);
+      } else {
+        setDirs([
+          { route: "blog", textName: "blog" },
+          { route: "/about", textName: "about" },
+          { route: "/account", textName: "account" },
+        ]);
+      }
+      localStorage.setItem("login-cred", jsonData);
+      console.log(res.data);
+      setTimeout(() => {
+        navi.push("/blog");
+      }, 3000);
+    } else {
+      responseState(res.error);
+    }
   };
 
   const handleState = () => {

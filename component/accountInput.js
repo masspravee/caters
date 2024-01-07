@@ -7,6 +7,7 @@ export default function AccountInput({
   initialValue,
   changeState,
   editable = true,
+  differentName = false,
   placeholder = "",
 }) {
   const [edit, setEdit] = useState(true);
@@ -30,7 +31,7 @@ export default function AccountInput({
 
   return (
     <div className={style.data}>
-      <label>{label_name}</label>
+      <label>{differentName ? differentName : label_name}</label>
       <input
         disabled={edit}
         value={initialValue ? initialValue : ""}

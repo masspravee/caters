@@ -1,13 +1,13 @@
 import style from "/styles/blog.module.css";
 import Post from "@/component/post";
 import React, { useState, useEffect } from "react";
-import GetRequest from "@/component/getRequest";
 import SideBar from "@/component/sideBar";
+import { useRouter } from "next/router";
 
 export default function Blog({ data }) {
-  console.log(data);
-  const [response, setResponse] = useState(data.message);
-  const [sideBarData, setSidebarData] = useState(data.allUserData);
+  const navi = useRouter();
+  const response = data.postData;
+  const sideBarData = data.allUsernames;
 
   return (
     <div className="container">

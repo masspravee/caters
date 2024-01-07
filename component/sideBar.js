@@ -30,7 +30,7 @@ export default function SideBar({ data }) {
   return (
     <>
       <div className={style.sideBar}>
-        <h1>Hwllo Wolrda</h1>
+        <h1>Hello World</h1>
         <div className={style.search}>
           <h2>Search Providers</h2>
           <input onChange={handleSearch}></input>

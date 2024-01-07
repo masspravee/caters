@@ -4,10 +4,10 @@ import { defaultImage } from "./smallComponents";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 export default function Post({ data }) {
-  const [postImage, setPostImage] = useState(data.photoUrl);
+  const postImage = data.photoUrl;
   const [currentImage, setCurrentImage] = useState(postImage[0]);
   const [count, setCount] = useState(0);
-  const [profile, setProfile] = useState(data.profileUrl);
+  const profile = data.profileUrl;
 
   const nextImage = () => {
     var len = postImage.length;
@@ -43,7 +43,9 @@ export default function Post({ data }) {
     <div className={style.post}>
       <header>
         <img src={profile ? profile : defaultImage(data.username)} />
-        <h2>{data.username}</h2>
+        <h2>
+          <a href={`/users/${data.username}`}>@{data.username}</a>
+        </h2>
       </header>
       <div className={style.content}>
         <div className={style.slideLeft}>

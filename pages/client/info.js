@@ -17,7 +17,7 @@ export default function Info() {
       const response = await SendData("/info", data);
       if (response.message) {
         setError(response.message);
-        navi.push("/account");
+        navi.push("/blog");
       } else {
         setError(response.error);
       }

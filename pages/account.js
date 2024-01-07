@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import AccountInput from "@/component/accountInput";
 import SendData from "@/component/sendData";
-import GetRequest from "@/component/getRequest";
+import { useRouter } from "next/router";
 import { defaultImage } from "@/component/smallComponents";
 export default function Account() {
   const [loginCred, setLoginCred] = useState({
-    username: "",
+    displayName: "",
     email: "",
     phone: "",
     bio: "",
@@ -20,6 +20,7 @@ export default function Account() {
   const [image, setImage] = useState({ file: [] });
   const [imageChange, setImageChange] = useState(false);
   const [showImage, setShowImage] = useState(null);
+  const navi = useRouter();
 
   const handleImage = (event) => {
     var file = event.target.files[0];
@@ -43,10 +44,13 @@ export default function Account() {
   };
 
   useEffect(() => {
-    let renderData = JSON.parse(localStorage.getItem("login-cred"));
-    setLoginCred(renderData);
-    setShowImage(renderData.photoUrl);
-    console.log(renderData);
+    try {
+      let renderData = JSON.parse(localStorage.getItem("login-cred"));
+      setLoginCred(renderData);
+      setShowImage(renderData.photoUrl);
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   useEffect(() => {
@@ -55,7 +59,7 @@ export default function Account() {
 
       var form = new FormData();
       form.append("file", image);
-      console.log(form);
+
       SendData("/profile", form, "multipart/form-data", false);
       setImageChange((prev) => !prev);
     }
@@ -91,7 +95,8 @@ export default function Account() {
         <div className={style.data_container}>
           <h2>@{loginCred.username}</h2>
           <AccountInput
-            label_name={"username"}
+            label_name={"displayName"}
+            differentName={"display name"}
             initialValue={loginCred.displayName}
             changeState={setLoginCred}
           />

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 export default function Welcome() {
   const navi = useRouter();
-  const [buttonState, setButtonState] = useState(true);
+  const [buttonState, setButtonState] = useState(false);
   const [popupRedir, setPopupRedir] = useState(false);
   const [response, setResponse] = useState(null);
 
