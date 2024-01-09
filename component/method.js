@@ -5,6 +5,7 @@ import {
   FacebookAuthProvider,
   getAuth,
 } from "firebase/auth";
+
 import SendData from "./sendData";
 
 export default async function loginMethod(platform, changeState) {
@@ -23,9 +24,10 @@ export default async function loginMethod(platform, changeState) {
           phone: "",
           bio: "",
           username: "",
+          client: "",
         };
         var res = await SendData("popupLogin", dataToSend);
-        changeState(res.message);
+        changeState(res);
       });
     } catch (err) {
       changeState(err);

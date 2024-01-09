@@ -8,9 +8,9 @@ export default async (req, res) => {
       var docData = document.data();
       res.json({ message: docData });
     } catch (e) {
-      res.json({ message: "error caught" });
+      res.json({ error: "error caught" });
     }
   } else {
-    res.status(400).json({ error: "error caught" });
+    res.json({ error: "error caught" });
   }
 };

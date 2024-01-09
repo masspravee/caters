@@ -6,10 +6,9 @@ export default async (req, res) => {
   var data = JSON.parse(req.body);
   var { uid } = data;
   try {
-    //check if doc exists in firestore
-
     var fileInFirestore = doc(firestore, "users", uid);
     var snap = await getDoc(fileInFirestore);
+    var userData = snap.data();
     if (snap.exists()) {
       setCookie("catersProfId", uid, {
         req,
@@ -19,7 +18,11 @@ export default async (req, res) => {
         sameSite: "none",
         secure: "true",
       });
-      res.json({ message: "Logged to Your Account Successfully", status: 200 });
+      res.json({
+        authType: "login200",
+        message: "Logged to Your Account Successfully",
+        data: userData,
+      });
     } else {
       await setDoc(doc(firestore, "users", uid), data);
       setCookie("catersProfId", uid, {
@@ -30,7 +33,11 @@ export default async (req, res) => {
         sameSite: "none",
         secure: "true",
       });
-      res.json({ message: "New Account Created", status: 200 });
+      res.json({
+        authType: "acc200",
+        message: "New Account Created",
+        data: data,
+      });
     }
   } catch (e) {
     res.json({ message: "Error", status: 400 });

@@ -29,7 +29,11 @@ export default async function Login(req, res) {
         secure: "true",
       });
 
-      res.json({ message: "Login Succcessful", data: docData });
+      res.json({
+        authType: "login200",
+        message: "Login Successful",
+        data: docData,
+      });
     })
     .catch((error) => {
       res.json({ error: error.code });

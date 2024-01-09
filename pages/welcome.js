@@ -2,19 +2,53 @@ import LoginBox from "@/component/login";
 import style from "/styles/new.module.css";
 import Notice from "@/component/notice";
 import SignUpBox from "@/component/signup";
-import React, { useState, useEffect } from "react";
-import RedirectComp from "@/component/redirect";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-
+import { NavBarProvider } from "@/pages/_app";
+import Loading from "@/component/loading";
 export default function Welcome() {
   const navi = useRouter();
   const [buttonState, setButtonState] = useState(false);
-  const [popupRedir, setPopupRedir] = useState(false);
-  const [response, setResponse] = useState(null);
+  const [dirs, setDirs] = useContext(NavBarProvider);
+
+  const [response, setResponse] = useState({ message: "", data: "" });
 
   useEffect(() => {
-    setResponse(null);
-  }, [buttonState]);
+    if (response.message && response.data) {
+      var jsonData = JSON.stringify(response.data);
+      localStorage.setItem("login-cred", jsonData);
+      if (response.data.client) {
+        setDirs([
+          { route: "blog", textName: "blog" },
+          { route: "/client/services", textName: "services" },
+          { route: "/client/create", textName: "create" },
+          { route: "/about", textName: "about" },
+          { route: "/account", textName: "account" },
+        ]);
+      } else {
+        setDirs([
+          { route: "blog", textName: "blog" },
+          { route: "/about", textName: "about" },
+          { route: "/account", textName: "account" },
+        ]);
+      }
+
+      setTimeout(() => {
+        if (response.authType == "login200") {
+          navi.push("/blog");
+        } else if (response.authType == "acc200") {
+          navi.push("/client/info");
+        }
+      }, 3000);
+    } else {
+      setDirs([
+        { route: "blog", textName: "blog" },
+        { route: "/about", textName: "about" },
+        { route: "/welcome", textName: "welcome" },
+      ]);
+    }
+    console.log(response);
+  }, [response]);
 
   return (
     <div className="container">

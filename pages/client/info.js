@@ -1,12 +1,15 @@
 import style from "/styles/forms.module.css";
-import React, { Component, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import SendData from "@/component/sendData";
 import { useRouter } from "next/router";
+import { LoaderProvider, ReplyProvider } from "../_app";
 export default function Info() {
   const navi = useRouter();
   const [username, setUsername] = useState(null);
   const [bio, setBio] = useState(null);
-  const [error, setError] = useState(null);
+  const [loader, setLoader] = useContext(LoaderProvider);
+  const [reply, setReply] = useContext(ReplyProvider);
+
   const submitValue = async (event) => {
     event.preventDefault();
     const data = {
@@ -14,15 +17,17 @@ export default function Info() {
       bio: bio,
     };
     if (EvaluateUsername(username)) {
+      setLoader(true);
       const response = await SendData("/info", data);
+      setLoader(false);
       if (response.message) {
-        setError(response.message);
+        setReply(response.message);
         navi.push("/blog");
       } else {
-        setError(response.error);
+        setReply(response.error);
       }
     } else {
-      setError("Invalid username Type");
+      setReply("Invalid username Type");
     }
   };
 
@@ -31,14 +36,12 @@ export default function Info() {
     return regex.test(name);
   };
 
-  useEffect(() => {}, []);
-
   return (
     <div className="container">
       <div className={style.form_container}>
         <form className={style.form} onSubmit={submitValue}>
           <h1>Enter Your Additional Info</h1>
-          <h2>{error}</h2>
+          <h2>{reply}</h2>
           <div className={style.input_group}>
             <label>Set username</label>
             <input

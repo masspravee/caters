@@ -1,11 +1,11 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import style from "/styles/account.module.css";
 import Loading from "@/component/loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import AccountInput from "@/component/accountInput";
 import SendData from "@/component/sendData";
-import { useRouter } from "next/router";
+import { LoaderProvider } from "./_app";
 import { defaultImage } from "@/component/smallComponents";
 export default function Account() {
   const [loginCred, setLoginCred] = useState({
@@ -14,13 +14,13 @@ export default function Account() {
     phone: "",
     bio: "",
     uid: "",
+    username: "",
   });
 
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useContext(LoaderProvider);
   const [image, setImage] = useState({ file: [] });
   const [imageChange, setImageChange] = useState(false);
   const [showImage, setShowImage] = useState(null);
-  const navi = useRouter();
 
   const handleImage = (event) => {
     var file = event.target.files[0];
@@ -46,6 +46,7 @@ export default function Account() {
   useEffect(() => {
     try {
       let renderData = JSON.parse(localStorage.getItem("login-cred"));
+      console.log(renderData);
       setLoginCred(renderData);
       setShowImage(renderData.photoUrl);
     } catch (err) {
@@ -67,7 +68,6 @@ export default function Account() {
 
   return (
     <div className={style.account}>
-      {loader ? <Loading /> : null}
       <form onSubmit={handler} className={style.card}>
         <h1>Your profile</h1>
         <div className={style.profile_container}>

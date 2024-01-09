@@ -47,7 +47,11 @@ export default async (req, res) => {
           sameSite: "none",
           secure: "true",
         });
-        res.json({ message: "account created", data: reDefinedData });
+        res.json({
+          authType: "acc200",
+          message: "Account Created",
+          data: reDefinedData,
+        });
       })
       .catch((error) => {
         res.json({ error: error.code });
