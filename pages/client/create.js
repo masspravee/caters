@@ -9,23 +9,24 @@ import {
   faCaretRight,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
-import Loading from "@/component/loading";
+import { LoaderProvider, ReplyProvider } from "@/pages/_app";
+
 import MessagePopup from "@/component/messagePopup";
 import { useRouter } from "next/router";
 import { defaultImage } from "@/component/smallComponents";
 import SendData from "@/component/sendData";
 export default function CreatePost() {
+  const [loader, setLoader] = useContext(LoaderProvider);
+  const [reply, setReply] = useContext(ReplyProvider);
   const navi = useRouter();
   const [username, setUserName] = useState("");
-  const [change, setChange] = useState(false);
   const [image, setImage] = useState();
   const [postImage, setPostImage] = useState([]);
-  const [response, setResponse] = useState(false);
+
   const [showImage, setShowImage] = useState(null);
   const [count, setCount] = useState(0);
   const [caption, setCaption] = useState(null);
   const [popupError, setPopupError] = useState(null);
-  const [loader, setLoader] = useState(false);
 
   const handleImage = (event) => {
     var files = Array.from(event.target.files);
@@ -77,13 +78,13 @@ export default function CreatePost() {
         "multipart/form-data",
         false
       );
+      setLoader(false);
       if (res.message == "success") {
-        setLoader(false);
-        setResponse("post Created Successfully");
+        setReply("post Created Successfully");
         console.log(res);
         navi.push("blog");
       } else {
-        setResponse("post Failed");
+        setReply("post Failed");
       }
     }
   };
@@ -104,7 +105,7 @@ export default function CreatePost() {
       setShowImage(renderData.photoUrl);
     } catch (err) {
       if (err.message === "renderData is null") {
-        setPopupError("You Need to Login to continue");
+        setReply("You Need to Login to continue");
         setTimeout(function () {
           navi.push("/welcome");
         }, 5000);
@@ -125,7 +126,7 @@ export default function CreatePost() {
         <div className={style.post}>
           <header className={style.header}>
             <h2>Create Post</h2>
-            <h3>{response ? response : ""}</h3>
+            <h3>{reply ? reply : ""}</h3>
           </header>
           <form className={style.content} onSubmit={submitPost}>
             <div className={style.content_header}>

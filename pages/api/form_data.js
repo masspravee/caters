@@ -15,7 +15,7 @@ export default async function (req, res) {
   const { catersProfId } = req.cookies;
   console.log("request");
   await post(req, res, catersProfId);
-  res.json({ message: "success" });
+  res.json({ message: "post created successfully" });
 }
 
 const post = async (req, res, fileName) => {
