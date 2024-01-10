@@ -4,12 +4,13 @@ import Notice from "@/component/notice";
 import SignUpBox from "@/component/signup";
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { NavBarProvider } from "@/pages/_app";
+import { NavBarProvider, ReplyProvider } from "@/pages/_app";
 
 export default function Welcome() {
   const navi = useRouter();
   const [buttonState, setButtonState] = useState(false);
   const [dirs, setDirs] = useContext(NavBarProvider);
+  const [reply, setReply] = useContext(ReplyProvider);
 
   const [response, setResponse] = useState({ message: "", data: "" });
 
@@ -32,6 +33,7 @@ export default function Welcome() {
           { route: "/account", textName: "account" },
         ]);
       }
+      setReply(response.message);
 
       setTimeout(() => {
         if (response.authType == "login200") {

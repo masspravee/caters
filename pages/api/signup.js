@@ -49,6 +49,7 @@ export default async (req, res) => {
         });
         res.json({
           authType: "acc200",
+          client: client,
           message: "Account Created",
           data: reDefinedData,
         });

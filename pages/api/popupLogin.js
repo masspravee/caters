@@ -20,7 +20,7 @@ export default async (req, res) => {
       });
       res.json({
         authType: "login200",
-        message: "Logged to Your Account Successfully",
+        message: "Login Successfully",
         data: userData,
       });
     } else {
@@ -35,7 +35,7 @@ export default async (req, res) => {
       });
       res.json({
         authType: "acc200",
-        message: "New Account Created",
+        message: "Account Created",
         data: data,
       });
     }

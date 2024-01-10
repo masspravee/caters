@@ -1,13 +1,20 @@
 import style from "/styles/blog.module.css";
 import React, { useState, useEffect } from "react";
 import { defaultImage } from "./smallComponents";
+import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 export default function Post({ data }) {
+  const navi = useRouter();
   const postImage = data.photoUrl;
   const [currentImage, setCurrentImage] = useState(postImage[0]);
   const [count, setCount] = useState(0);
   const profile = data.profileUrl;
+  const { postName } = data;
+
+  const gotoPost = () => {
+    navi.push(`/posts/${postName}`);
+  };
 
   const nextImage = () => {
     var len = postImage.length;
@@ -40,7 +47,7 @@ export default function Post({ data }) {
   };
 
   return (
-    <div className={style.post}>
+    <div className={style.post} onDoubleClick={gotoPost}>
       <header>
         <img src={profile ? profile : defaultImage(data.username)} />
         <h2>
