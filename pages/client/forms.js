@@ -1,7 +1,12 @@
 import style from "/styles/forms.module.css";
 import React, { useState } from "react";
 import SendData from "@/component/sendData";
+import { LoaderProvider, ReplyProvider } from "@/pages/_app";
+import { useRouter } from "next/router";
 export default function Forms() {
+  const [loader, setLoader] = useContext(LoaderProvider);
+  const [reply, setReply] = useContext(ReplyProvider);
+  const navi = useRouter();
   const [formData, setFormData] = useState({
     company_name: null,
     company_owner_name: null,
@@ -13,6 +18,7 @@ export default function Forms() {
   const [file, setFile] = useState({ file: [] });
   const getForm = async (event) => {
     event.preventDefault();
+    setLoader(true);
     const newForm = new FormData();
     newForm.append("data", JSON.stringify(formData));
     newForm.append("file", file);
@@ -22,7 +28,11 @@ export default function Forms() {
       "multipart/form-data",
       false
     );
-    console.log(response);
+    setReply(response.message);
+    setLoader(false);
+    if (response.authType == "form200") {
+      navi.push("/client/info");
+    }
   };
 
   const handleChange = (event) => {

@@ -5,7 +5,7 @@ import SignUpBox from "@/component/signup";
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { NavBarProvider } from "@/pages/_app";
-import Loading from "@/component/loading";
+
 export default function Welcome() {
   const navi = useRouter();
   const [buttonState, setButtonState] = useState(false);
@@ -36,8 +36,8 @@ export default function Welcome() {
       setTimeout(() => {
         if (response.authType == "login200") {
           navi.push("/blog");
-        } else if (response.authType == "acc200") {
-          navi.push("/client/info");
+        } else if (response.authType == "acc200" && response.client) {
+          navi.push("/client/forms");
         }
       }, 3000);
     } else {

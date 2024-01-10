@@ -13,9 +13,12 @@ export const config = {
 
 export default async function (req, res) {
   const { catersProfId } = req.cookies;
-  console.log("request");
-  await post(req, res, catersProfId);
-  res.json({ message: "post created successfully" });
+  try {
+    await post(req, res, catersProfId);
+    res.json({ message: "Details Fetched", authType: "form200" });
+  } catch (err) {
+    res.json({ message: "Error Occured", authType: "form400" });
+  }
 }
 
 const post = async (req, res, fileName) => {
