@@ -10,10 +10,14 @@ export default async function (req, res) {
     const allDocs = data.docs.map((doc) => {
       return doc.data();
     });
-
-    const allUserData = userFetchedData.docs.map((doc) => {
-      return doc.data();
-    });
+    //filtering clients who are true cients
+    const allUserData = userFetchedData.docs
+      .filter((doc) => {
+        return doc.data().client;
+      })
+      .map((doc) => {
+        return doc.data();
+      });
 
     const allUsernames = allUserData.map((data) => {
       return data.username;
@@ -24,7 +28,11 @@ export default async function (req, res) {
     for (let i = 0; i < allDocs.length; i++) {
       for (let j = 0; j < allUserData.length; j++) {
         if (allDocs[i].uid === allUserData[j].uid) {
-          var tempData = { ...allDocs[i], profileUrl: allUserData[j].photoUrl };
+          var tempData = {
+            ...allDocs[i],
+            profileUrl: allUserData[j].photoUrl,
+            isVerified: allUserData[j].isVerified,
+          };
           newRefinedData.push(tempData);
         }
       }

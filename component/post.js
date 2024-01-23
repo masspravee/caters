@@ -1,7 +1,8 @@
 import style from "/styles/blog.module.css";
-import React, { useState, useEffect } from "react";
-import { defaultImage } from "./smallComponents";
+import React, { useState } from "react";
+import { defaultImage, VerifiedLogo } from "./smallComponents";
 import { useRouter } from "next/router";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 export default function Post({ data }) {
@@ -50,9 +51,10 @@ export default function Post({ data }) {
     <div className={style.post} onDoubleClick={gotoPost}>
       <header>
         <img src={profile ? profile : defaultImage(data.username)} />
-        <h2>
+        <div className={style.username_space}>
           <a href={`/users/${data.username}`}>@{data.username}</a>
-        </h2>
+          {data.isVerified ? <VerifiedLogo /> : null}
+        </div>
       </header>
       <div className={style.content}>
         <div className={style.slideLeft}>

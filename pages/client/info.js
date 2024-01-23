@@ -22,7 +22,7 @@ export default function Info() {
       setLoader(false);
       if (response.message) {
         setReply(response.message);
-        navi.push("/blog");
+        navi.push("/client/services");
       } else {
         setReply(response.error);
       }

@@ -40,6 +40,8 @@ export default function Welcome() {
           navi.push("/blog");
         } else if (response.authType == "acc200" && response.client) {
           navi.push("/client/forms");
+        } else {
+          navi.push("/client/additional-info");
         }
       }, 3000);
     } else {

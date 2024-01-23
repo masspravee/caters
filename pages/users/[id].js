@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import style from "/styles/blog.module.css";
 import SideBar from "@/component/sideBar";
-import { defaultImage } from "@/component/smallComponents";
+import { defaultImage, VerifiedLogo } from "@/component/smallComponents";
 import post from "../api/post";
 export default function Profile({ userData, userPosts, sideBarData }) {
   const userDetails = userData;
@@ -25,10 +25,15 @@ export default function Profile({ userData, userPosts, sideBarData }) {
                 ></img>
               </div>
               <div className={style.right}>
-                <span className={style.displayName}>
-                  @{userDetails.username}
-                </span>
-                <button>Follow</button>
+                <div className={style.topContainer}>
+                  <div className={style.namespace}>
+                    <span className={style.displayName}>
+                      {userDetails.username}
+                    </span>
+                    {userDetails.isVerified ? <VerifiedLogo /> : null}
+                  </div>
+                  <button>Follow</button>
+                </div>
                 <div className={style.infos}>
                   <span>{userPosts.length}posts</span>
                   <span>10 following</span>

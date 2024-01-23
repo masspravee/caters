@@ -1,17 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import style from "/styles/services.module.css";
 import ButtonComponent from "@/component/buttonComponent";
 import district from "/component/district.json";
-
+import { useRouter } from "next/router";
+import SendData from "@/component/sendData";
+import { LoaderProvider, ReplyProvider } from "../_app";
 export default function Services() {
+  const navi = useRouter();
   const [dataDistrict] = useState(district);
   const [cityArray, setCityArray] = useState(dataDistrict);
   const [search, setSearch] = useState("");
   const [selectedCity, setSelectedCity] = useState([]);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [loader, setLoader] = useContext(LoaderProvider);
+  const [reply, setReply] = useContext(ReplyProvider);
 
   const handleInput = (e) => {
     setSearch(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    if (selectedCity.length > 0) {
+      const data = { cities: selectedCity };
+      const response = await SendData("addCities", data);
+      if (response.message) {
+        setReply(response.message);
+        navi.push("/account");
+      } else {
+        setReply(response.error);
+      }
+    } else {
+      setErrorMsg("Please select a city");
+    }
   };
 
   const handleClick = (e, city) => {
@@ -95,7 +115,7 @@ export default function Services() {
             </div>
           </div>
           <footer>
-            <button>Submit</button>
+            <button onClick={handleSubmit}>Submit</button>
           </footer>
         </div>
       </div>

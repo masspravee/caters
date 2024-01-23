@@ -12,9 +12,25 @@
   line-height: 70px;
 }
 
-.inner .sideBar {
+.inner .sideBar , .inner  .suggested{
   width: 30%;
   min-height: 100%;
+}
+
+.inner  .suggested{
+  background-color: white ;
+}
+
+.inner  .suggested a{
+display: block;
+text-decoration: none;
+color: black;
+padding: 10px;
+cursor: pointer;
+}
+
+.inner  .suggested a::before , .displayName::before{
+  content: "@";
 }
 
 .inner .blog {
@@ -39,13 +55,17 @@
   padding: 10px 0px;
 }
 
-.inner .blog .post header h2 {
-  margin-top: 0.5rem;
+.inner .blog .post header .username_space {
   margin-left: 1rem;
-  font-size: 18px;
+  margin-top: -0.5rem;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
-.inner .blog .post header h2 a {
+.inner .blog .post header .username_space a {
   color: rgb(50, 49, 49);
   text-decoration: none;
 }
@@ -121,7 +141,7 @@
     width: 90%;
   }
 
-  .inner .sideBar {
+  .inner .sideBar , .inner  .suggested{
     display: none;
   }
 }
@@ -151,6 +171,20 @@
   width: 75px;
 }
 .profile .account .right {
+}
+
+.profile .account .right  .topContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+.profile .account .right .namespace{
+  display: flex;
+  align-items: center;
+
+
 }
 
 .profile .account .right .displayName {

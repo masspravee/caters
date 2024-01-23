@@ -28,6 +28,10 @@ export default async (req, res) => {
           bio: "",
           username: "",
         };
+        if (client) {
+          reDefinedData.isVerified = false;
+          reDefinedData.location = [];
+        }
 
         await setDoc(doc(firestore, "users", uid), reDefinedData);
 

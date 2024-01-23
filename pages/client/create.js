@@ -1,10 +1,9 @@
 import style from "/styles/create-post.module.css";
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useContext } from "react";
 // file not uploaded on production
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFileImage,
-  faLocationDot,
   faCaretLeft,
   faCaretRight,
   faTrashCan,
@@ -13,17 +12,19 @@ import { LoaderProvider, ReplyProvider } from "@/pages/_app";
 
 import MessagePopup from "@/component/messagePopup";
 import { useRouter } from "next/router";
-import { defaultImage } from "@/component/smallComponents";
+import { defaultImage, VerifiedLogo } from "@/component/smallComponents";
 import SendData from "@/component/sendData";
 export default function CreatePost() {
   const [loader, setLoader] = useContext(LoaderProvider);
   const [reply, setReply] = useContext(ReplyProvider);
   const navi = useRouter();
-  const [username, setUserName] = useState("");
+  const [userCred, setUserCred] = useState({
+    username: "",
+    imageUrl: "",
+    isVerified: false,
+  });
   const [image, setImage] = useState();
   const [postImage, setPostImage] = useState([]);
-
-  const [showImage, setShowImage] = useState(null);
   const [count, setCount] = useState(0);
   const [caption, setCaption] = useState(null);
   const [popupError, setPopupError] = useState(null);
@@ -69,7 +70,7 @@ export default function CreatePost() {
       dataToServer.append("caption", caption);
       image.map((file, index) => {
         dataToServer.append(`file${index}`, file);
-        dataToServer.append("username", username);
+        dataToServer.append("username", userCred.username);
       });
 
       var res = await SendData(
@@ -82,7 +83,7 @@ export default function CreatePost() {
       if (res.message == "success") {
         setReply("post Created Successfully");
         console.log(res);
-        navi.push("blog");
+        navi.push("/blog");
       } else {
         setReply("post Failed");
       }
@@ -100,9 +101,7 @@ export default function CreatePost() {
   const getPage = () => {
     try {
       let renderData = JSON.parse(localStorage.getItem("login-cred"));
-      setUserName(renderData.username);
-
-      setShowImage(renderData.photoUrl);
+      setUserCred(renderData);
     } catch (err) {
       if (err.message === "renderData is null") {
         setReply("You Need to Login to continue");
@@ -119,7 +118,6 @@ export default function CreatePost() {
 
   return (
     <div className="container">
-      {loader ? <Loading /> : null}
       {popupError ? <MessagePopup message={popupError} /> : null}
 
       <div className={style.inner_container}>
@@ -131,10 +129,17 @@ export default function CreatePost() {
           <form className={style.content} onSubmit={submitPost}>
             <div className={style.content_header}>
               <img
-                src={showImage ? showImage : defaultImage(username)}
+                src={
+                  userCred.imageUrl
+                    ? userCred.imageUrl
+                    : defaultImage(userCred.username)
+                }
                 className={style.profile}
               ></img>
-              <h3>@{username}</h3>
+              <div className={style.namespace}>
+                <span className={style.displayName}>{userCred.username}</span>
+                {userCred.isVerified ? <VerifiedLogo /> : null}
+              </div>
             </div>
             <div className={style.content_box}>
               <textarea

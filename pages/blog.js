@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 export default function Blog({ data }) {
   const navi = useRouter();
   const response = data.postData;
+
   const sideBarData = data.allUsernames;
 
   return (
@@ -23,7 +24,13 @@ export default function Blog({ data }) {
               })
             : null}
         </div>
-        <div className={style.sideBar}></div>
+
+        <div className={style.suggested}>
+          <h3>suggested for you</h3>
+          {sideBarData.map((value, index) => {
+            return <a href={`/users/${value}`}>{value}</a>;
+          })}
+        </div>
       </div>
     </div>
   );

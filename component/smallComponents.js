@@ -3,4 +3,11 @@ const defaultImage = (name) => {
   return url;
 };
 
-export { defaultImage };
+const VerifiedLogo = () => {
+  return (
+    <>
+      <span className="material-symbols-outlined">check_circle</span>
+    </>
+  );
+};
+export { defaultImage, VerifiedLogo };

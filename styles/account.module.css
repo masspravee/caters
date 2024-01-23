@@ -66,6 +66,19 @@
   margin-top: 0.5rem;
 }
 
+
+.data_container .username{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+
 .data {
   padding: 10px;
 }

@@ -1,13 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import style from "/styles/account.module.css";
-import Loading from "@/component/loading";
+import { deleteCookie } from "cookies-next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import AccountInput from "@/component/accountInput";
 import SendData from "@/component/sendData";
 import { LoaderProvider } from "./_app";
-import { defaultImage } from "@/component/smallComponents";
+import { defaultImage, VerifiedLogo } from "@/component/smallComponents";
+import { useRouter } from "next/router";
 export default function Account() {
+  const navi = useRouter();
   const [loginCred, setLoginCred] = useState({
     displayName: "",
     email: "",
@@ -21,6 +23,12 @@ export default function Account() {
   const [image, setImage] = useState({ file: [] });
   const [imageChange, setImageChange] = useState(false);
   const [showImage, setShowImage] = useState(null);
+
+  const Logout = () => {
+    localStorage.removeItem("login-cred");
+    deleteCookie("catersProfId");
+    navi.push("/welcome");
+  };
 
   const handleImage = (event) => {
     var file = event.target.files[0];
@@ -93,7 +101,10 @@ export default function Account() {
         </div>
 
         <div className={style.data_container}>
-          <h2>@{loginCred.username}</h2>
+          <div className={style.username}>
+            <span>@{loginCred.username}</span>
+            {loginCred.isVerified ? <VerifiedLogo /> : null}
+          </div>
           <AccountInput
             label_name={"displayName"}
             differentName={"display name"}
@@ -120,6 +131,7 @@ export default function Account() {
           />
 
           <button type="submit">Save Info</button>
+          <button onClick={Logout}>Logout</button>
         </div>
       </form>
     </div>

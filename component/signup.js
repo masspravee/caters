@@ -96,7 +96,7 @@ export default function SignUpBox({ changeState, response, responseState }) {
           </div>
           <form className={style.input_container} onSubmit={handler}>
             <input
-              placeholder="enter displayName"
+              placeholder="enter Name"
               name="displayName"
               onChange={handleInput}
               required={true}

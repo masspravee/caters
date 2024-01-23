@@ -16,8 +16,10 @@ export default function Additional() {
 
     if (EvaluateUsername(userCred.username)) {
       const response = await SendData("/additional-info", data);
-      if (response.message) {
+      if (response.message && data.client) {
         setError(response.message);
+        navi.push("/client/forms");
+      } else if (response.message) {
         navi.push("/blog");
       } else {
         setError(response.error);

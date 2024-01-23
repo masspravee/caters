@@ -1,5 +1,5 @@
 import style from "/styles/forms.module.css";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import SendData from "@/component/sendData";
 import { LoaderProvider, ReplyProvider } from "@/pages/_app";
 import { useRouter } from "next/router";
