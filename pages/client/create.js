@@ -23,6 +23,7 @@ export default function CreatePost() {
     imageUrl: "",
     isVerified: false,
   });
+  console.log(userCred);
   const [image, setImage] = useState();
   const [postImage, setPostImage] = useState([]);
   const [count, setCount] = useState(0);
@@ -129,9 +130,10 @@ export default function CreatePost() {
           <form className={style.content} onSubmit={submitPost}>
             <div className={style.content_header}>
               <img
+                referrerPolicy="no-referrer"
                 src={
-                  userCred.imageUrl
-                    ? userCred.imageUrl
+                  userCred.photoUrl
+                    ? userCred.photoUrl
                     : defaultImage(userCred.username)
                 }
                 className={style.profile}
