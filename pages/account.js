@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import AccountInput from "@/component/accountInput";
 import SendData from "@/component/sendData";
-import { LoaderProvider } from "./_app";
+import GetRequest from "@/component/getRequest";
+import { LoaderProvider, NavBarProvider, ReplyProvider } from "./_app";
 import { defaultImage, VerifiedLogo } from "@/component/smallComponents";
 import { useRouter } from "next/router";
 export default function Account() {
@@ -18,7 +19,8 @@ export default function Account() {
     uid: "",
     username: "",
   });
-
+  const [reply, setReply] = useContext(ReplyProvider);
+  const [dirs, setDirs] = useContext(NavBarProvider);
   const [loader, setLoader] = useContext(LoaderProvider);
   const [image, setImage] = useState({ file: [] });
   const [imageChange, setImageChange] = useState(false);
@@ -27,6 +29,13 @@ export default function Account() {
   const Logout = () => {
     localStorage.removeItem("login-cred");
     deleteCookie("catersProfId");
+    setReply("Logged out successfully");
+    setDirs([
+      { route: "blog", textName: "blog" },
+      { route: "/about", textName: "about" },
+      { route: "/welcome", textName: "welcome" },
+      { route: "/login", textName: "login" },
+    ]);
     navi.push("/welcome");
   };
 
@@ -51,12 +60,24 @@ export default function Account() {
     setLoader(false);
   };
 
+  const getCred = async () => {
+    let res = await GetRequest("/login-cred");
+    if (!res.error) {
+      var message = res.message;
+      localStorage.setItem("login-cred", JSON.stringify(message));
+      return message;
+    }
+  };
+
   useEffect(() => {
     try {
       let renderData = JSON.parse(localStorage.getItem("login-cred"));
-      console.log(renderData);
-      setLoginCred(renderData);
-      setShowImage(renderData.photoUrl);
+      if (!renderData) {
+        renderData = getCred();
+      } else {
+        setLoginCred(renderData);
+        setShowImage(renderData.photoUrl);
+      }
     } catch (err) {
       console.log(err);
     }

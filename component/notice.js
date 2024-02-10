@@ -1,10 +1,6 @@
 import style from "/styles/new.module.css";
 
-export default function Notice({ changeState, title, msg, name }) {
-  const handleChange = () => {
-    changeState((prevState) => !prevState);
-  };
-
+export default function Notice({ title, msg }) {
   return (
     <div className={style.notice}>
       <div className={style.inner_notice}>
@@ -13,9 +9,6 @@ export default function Notice({ changeState, title, msg, name }) {
         </div>
         <div className={style.content}>
           <span> {msg}</span>
-        </div>
-        <div className={style.footer}>
-          <button onClick={handleChange}>{name}</button>
         </div>
       </div>
     </div>

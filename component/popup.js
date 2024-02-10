@@ -3,8 +3,6 @@ import style from "/styles/popup.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 export default function PopUp({ reply, changeState }) {
-  console.log(reply);
-
   if (reply) {
     setTimeout(() => {
       changeState(false);

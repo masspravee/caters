@@ -23,24 +23,27 @@ export default function App({ Component, pageProps }) {
         if (message.client) {
           setDirs([
             { route: "/blog", textName: "blog" },
-            { route: "/client/services", textName: "services" },
+            { route: "/client/search", textName: "search" },
             { route: "/client/create", textName: "create" },
             { route: "/about", textName: "about" },
             { route: "/account", textName: "account" },
           ]);
         } else {
           setDirs([
-            { route: "blog", textName: "blog" },
+            { route: "/blog", textName: "blog" },
+            { route: "/search", textName: "search" },
             { route: "/about", textName: "about" },
+
             { route: "/account", textName: "account" },
           ]);
         }
         localStorage.setItem("login-cred", JSON.stringify(message));
       } else {
         setDirs([
-          { route: "blog", textName: "blog" },
+          { route: "/blog", textName: "blog" },
           { route: "/about", textName: "about" },
           { route: "/welcome", textName: "welcome" },
+          { route: "/login", textName: "login" },
         ]);
       }
     } catch (e) {

@@ -39,6 +39,7 @@ export default async function (req, res) {
     }
 
     res.json({ postData: newRefinedData, allUsernames: allUsernames });
+    console.log(allUsernames);
   } catch (err) {
     res.json({ error: "error" });
   }

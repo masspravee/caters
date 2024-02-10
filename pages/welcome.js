@@ -1,92 +1,58 @@
-import LoginBox from "@/component/login";
-import style from "/styles/new.module.css";
-import Notice from "@/component/notice";
-import SignUpBox from "@/component/signup";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
+import style from "/styles/Welcome.module.css";
 import { useRouter } from "next/router";
-import { NavBarProvider, ReplyProvider } from "@/pages/_app";
-
-export default function Welcome() {
+export default function RedirectComponent() {
+  const [selection, setSelection] = useState(null);
   const navi = useRouter();
-  const [buttonState, setButtonState] = useState(false);
-  const [dirs, setDirs] = useContext(NavBarProvider);
-  const [reply, setReply] = useContext(ReplyProvider);
-
-  const [response, setResponse] = useState({ message: "", data: "" });
-
-  useEffect(() => {
-    if (response.message && response.data) {
-      var jsonData = JSON.stringify(response.data);
-      localStorage.setItem("login-cred", jsonData);
-      if (response.data.client) {
-        setDirs([
-          { route: "blog", textName: "blog" },
-          { route: "/client/services", textName: "services" },
-          { route: "/client/create", textName: "create" },
-          { route: "/about", textName: "about" },
-          { route: "/account", textName: "account" },
-        ]);
-      } else {
-        setDirs([
-          { route: "blog", textName: "blog" },
-          { route: "/about", textName: "about" },
-          { route: "/account", textName: "account" },
-        ]);
-      }
-      setReply(response.message);
-
-      setTimeout(() => {
-        if (response.authType == "login200") {
-          navi.push("/blog");
-        } else if (response.authType == "acc200" && response.client) {
-          navi.push("/client/forms");
-        } else {
-          navi.push("/client/additional-info");
-        }
-      }, 3000);
+  const handle = (event) => {
+    event.preventDefault();
+    if (selection == "client") {
+      navi.push("/client/signup");
     } else {
-      setDirs([
-        { route: "blog", textName: "blog" },
-        { route: "/about", textName: "about" },
-        { route: "/welcome", textName: "welcome" },
-      ]);
+      navi.push("/user/signup");
     }
-    console.log(response);
-  }, [response]);
+  };
+
+  const handleChange = (event) => {
+    setSelection(event.target.value);
+  };
 
   return (
     <div className="container">
-      <div className={style.inner_container}>
+      <div className={style.fill_container}>
         <div className={style.box_container}>
-          {buttonState ? (
-            <>
-              <Notice
-                changeState={setButtonState}
-                title={"Welcome back"}
-                name={"sign in"}
-                msg={"Log in to continue your delicious journey with us"}
+          <h2>SignUp</h2>
+          <form onSubmit={handle}>
+            <label className={style.question}>Select Your Account Type</label>
+            <div className={style.check}>
+              <input
+                type="radio"
+                name="accountType"
+                value="personal"
+                id="personal"
+                onChange={handleChange}
+                required
               />
-              <LoginBox
-                changeState={setButtonState}
-                response={response}
-                responseState={setResponse}
+              <span className="material-symbols-outlined">person</span>
+
+              <label htmlFor="personal">Personal</label>
+            </div>
+            <div className={style.check}>
+              <input
+                type="radio"
+                name="accountType"
+                value="client"
+                id="organisation"
+                onChange={handleChange}
+                required
               />
-            </>
-          ) : (
-            <>
-              <SignUpBox
-                changeState={setButtonState}
-                responseState={setResponse}
-                response={response}
-              ></SignUpBox>
-              <Notice
-                changeState={setButtonState}
-                title={"Welcome to Caters"}
-                name={"log in "}
-                msg={"Start your flavorful journey with us!"}
-              />
-            </>
-          )}
+              <span className="material-symbols-outlined">add_business</span>
+              <label htmlFor="organisation">Organisation</label>
+            </div>
+            <button>Submit</button>
+            <span>or</span>
+            <button>Login</button>
+          </form>
         </div>
       </div>
     </div>

@@ -1,14 +1,14 @@
 import style from "/styles/blog.module.css";
 import Post from "@/component/post";
-import React, { useState, useEffect } from "react";
 import SideBar from "@/component/sideBar";
 import { useRouter } from "next/router";
+import SinglePost from "@/component/singlePost";
 
 export default function Blog({ data }) {
   const navi = useRouter();
   const response = data.postData;
 
-  const sideBarData = data.allUsernames;
+  const sideBarData = data.allUsernames.filter((user) => user != "");
 
   return (
     <div className="container">
@@ -17,18 +17,24 @@ export default function Blog({ data }) {
           <SideBar data={sideBarData} />
         </div>
         <div className={style.blog}>
-          <h1>Blog</h1>
-          {response
-            ? response.map((value, index) => {
-                return <Post data={value} key={index} />;
-              })
-            : null}
+          <div className={style.post_wrapper}>
+            <h1>Blog</h1>
+            {response
+              ? response.map((value, index) => {
+                  return <SinglePost data={value} key={index} />;
+                })
+              : null}
+          </div>
         </div>
 
         <div className={style.suggested}>
           <h3>suggested for you</h3>
           {sideBarData.map((value, index) => {
-            return <a href={`/users/${value}`}>{value}</a>;
+            return (
+              <a key={index} href={`/profile/${value}`}>
+                {value}
+              </a>
+            );
           })}
         </div>
       </div>

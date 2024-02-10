@@ -1,4 +1,4 @@
-import Post from "@/component/post";
+import SinglePost from "@/component/singlePost";
 import style from "/styles/blog.module.css";
 export default function Pages({ data }) {
   return (
@@ -6,7 +6,9 @@ export default function Pages({ data }) {
       <div className={style.inner}>
         <div className={style.sideBar}></div>
         <div className={style.blog}>
-          <Post data={data} />;
+          <div className={style.post_wrapper}>
+            <SinglePost data={data} />;
+          </div>
         </div>
         <div className={style.sideBar}></div>
       </div>

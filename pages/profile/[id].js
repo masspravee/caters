@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import style from "/styles/blog.module.css";
+import blogStyle from "/styles/blog.module.css";
 import SideBar from "@/component/sideBar";
 import { defaultImage, VerifiedLogo } from "@/component/smallComponents";
-import post from "../api/post";
 export default function Profile({ userData, userPosts, sideBarData }) {
   const userDetails = userData;
 
   return (
     <div className="container">
-      <div className={style.inner}>
-        <div className={style.sideBar}>
+      <div className={blogStyle.inner}>
+        <div className={blogStyle.sideBar}>
           <SideBar data={sideBarData} />
         </div>
-        <div className={style.blog}>
+        <div className={blogStyle.blog}>
           <div className={style.profile}>
             <div className={style.account}>
               <div className={style.left}>
@@ -35,17 +35,25 @@ export default function Profile({ userData, userPosts, sideBarData }) {
                   <button>Follow</button>
                 </div>
                 <div className={style.infos}>
-                  <span>{userPosts.length}posts</span>
-                  <span>10 following</span>
+                  <h3>{userDetails.displayName}</h3>
+                  <span className={style.userposts}>
+                    {userPosts.length + " "}posts
+                  </span>
+                  <span className={style.follow}>10 following</span>
                 </div>
-                <h3>{userDetails.displayName}</h3>
-                <span>{userDetails.bio}</span>
+
                 <div className={style.contact}>
+                  <span>{userDetails.bio}</span>
                   <span>contact - {userDetails.email}</span>
                   <span>
                     {userDetails.phone
                       ? `contact - ${userDetails.phone}`
                       : null}
+                    <span>
+                      {userDetails.location
+                        ? userDetails.location.toString()
+                        : null}
+                    </span>
                   </span>
                 </div>
               </div>

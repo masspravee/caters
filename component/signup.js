@@ -1,17 +1,18 @@
 import style from "/styles/new.module.css";
 import loginMethod from "./method";
 import React, { useState, useEffect, useContext } from "react";
+import Notice from "./notice";
 import SendData from "./sendData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { LoaderProvider, ReplyProvider } from "@/pages/_app";
-export default function SignUpBox({ changeState, response, responseState }) {
+export default function SignUpBox({ response, responseState, client = true }) {
   const [userCred, setUserCred] = useState({
     displayName: "",
     email: "",
     password: "",
     retype: "",
-    client: false,
+    client: client,
   });
 
   const [loader, setLoader] = useContext(LoaderProvider);
@@ -32,33 +33,25 @@ export default function SignUpBox({ changeState, response, responseState }) {
 
   const handler = async (event) => {
     event.preventDefault();
-    var promptRes = confirm(
-      "Are you sure about your confirmations; actions cant be reverted"
-    );
-    if (promptRes) {
-      var dataToServer = userCred;
-      delete dataToServer.retype;
-      setLoader(true);
-      var res = await SendData("/signup", dataToServer);
-      setLoader(false);
-      if (res.message && res.data) {
-        responseState(res);
-        setReply(res.message);
-      } else {
-        responseState(res.error);
-        setReply(res.error);
-      }
+
+    var dataToServer = userCred;
+    delete dataToServer.retype;
+    setLoader(true);
+    var res = await SendData("/signup", dataToServer);
+    setLoader(false);
+    if (res.message && res.data) {
+      responseState(res);
+      setReply(res.message);
+    } else {
+      responseState(res.error);
+      setReply(res.error);
     }
   };
 
   const handleInput = (event) => {
     var { name, value } = event.target;
 
-    if (name == "client") {
-      setUserCred((prev) => ({ ...prev, [name]: event.target.checked }));
-    } else {
-      setUserCred((prev) => ({ ...prev, [name]: value }));
-    }
+    setUserCred((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleState = () => {
@@ -71,10 +64,6 @@ export default function SignUpBox({ changeState, response, responseState }) {
         <header>
           <div className={style.header}>
             <span className={style.firstSpan}>SignUp</span>
-            <span className={style.secondSpan}>/</span>
-            <span className={style.secondSpanWord} onClick={handleState}>
-              Login
-            </span>
           </div>
           <div>
             <h3 className={style.errorMsg}>
@@ -124,15 +113,7 @@ export default function SignUpBox({ changeState, response, responseState }) {
               onChange={handleInput}
               required={true}
             />
-            <div className={style.check}>
-              <input
-                type="checkbox"
-                id="check"
-                name="client"
-                onChange={handleInput}
-              />
-              <label htmlFor="check">Do you have any companies</label>
-            </div>
+
             <div className={style.footer}>
               <button type="submit">SignIn</button>
             </div>

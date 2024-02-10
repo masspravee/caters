@@ -13,7 +13,7 @@ export default function SideBar({ data }) {
   const [results, setResults] = useState(null);
 
   const handleSearch = (event) => {
-    var value = event.target.value;
+    var value = event.target.value.toLowerCase();
     if (value != "") {
       setSearch(value);
 
@@ -39,7 +39,7 @@ export default function SideBar({ data }) {
               ? null
               : results.map((resultValue) => {
                   return (
-                    <a href={`/users/${resultValue}`} key={resultValue}>
+                    <a href={`/profile/${resultValue}`} key={resultValue}>
                       <li>@{resultValue}</li>
                     </a>
                   );
