@@ -14,7 +14,6 @@ import { defaultImage } from "./smallComponents";
 import style from "/styles/blog.module.css";
 import { useRouter } from "next/router";
 export default function SinglePost({ data }) {
-  console.log(data.isVerified);
   const navi = useRouter();
   const postImage = data.photoUrl;
   const [currentImage, setCurrentImage] = useState(postImage[0]);
