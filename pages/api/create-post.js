@@ -1,8 +1,11 @@
 import { IncomingForm } from "formidable";
 import uploadImage from "@/component/uploadImage";
-const fs = require("fs");
-import { firestore } from "@/config";
+import queue from "@/component/qurrelQuene";
+import Bull from "bull";
+const Queue = new Bull("first-queue");
+
 import moment from "moment";
+
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export const config = {
@@ -41,7 +44,29 @@ const post = async (req, res) => {
       var caption = fields.caption[0];
       var username = fields.username[0];
 
-      const promiseUrl = filesKey.map(async (file, index) => {
+      var data = {
+        postName: postName,
+        caption: caption,
+        photoUrl: [],
+        username: username,
+        uid: catersProfId,
+        time: setDate(),
+      };
+
+      queue.add(data);
+
+      if (filesKey && caption && username) {
+        //   res.json({ message: "success" });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: "error" });
+  }
+};
+
+/**
+const promiseUrl = filesKey.map(async (file, index) => {
         var singleUrl = await saveFile(files[file][0]);
 
         return singleUrl;
@@ -60,17 +85,14 @@ const post = async (req, res) => {
 
       await setDoc(doc(firestore, "post", postName), data);
 
-      res.json({ message: "success" });
-    });
-  } catch (err) {
-    console.log(err);
-    res.json({ message: "error" });
-  }
-};
-
-async function saveFile(file) {
+* 
+ * 
+ * 
+ * 
+ * async function saveFile(file) {
   const data = fs.readFileSync(file.filepath);
   var newFileName = `${catersProfId}-${timer()}`;
   var imageUrl = await uploadImage(data, "/post", newFileName);
   return imageUrl;
 }
+ */

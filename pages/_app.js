@@ -9,11 +9,13 @@ import Loading from "@/component/loading";
 export const NavBarProvider = React.createContext();
 export const LoaderProvider = React.createContext();
 export const ReplyProvider = React.createContext();
+export const UserCredProvider = React.createContext();
 
 export default function App({ Component, pageProps }) {
   const [dirs, setDirs] = useState([]);
   const [loader, setLoader] = useState(false);
   const [reply, setReply] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   const getCred = async () => {
     try {
@@ -37,6 +39,7 @@ export default function App({ Component, pageProps }) {
             { route: "/account", textName: "account" },
           ]);
         }
+        setUserData(JSON.stringify(message));
         localStorage.setItem("login-cred", JSON.stringify(message));
       } else {
         setDirs([
@@ -59,11 +62,12 @@ export default function App({ Component, pageProps }) {
     <LoaderProvider.Provider value={[loader, setLoader]}>
       <NavBarProvider.Provider value={[dirs, setDirs]}>
         <ReplyProvider.Provider value={[reply, setReply]}>
-          {loader ? <Loading /> : null}
-          {reply ? <PopUp reply={reply} changeState={setReply} /> : null}
-
-          <Navbar />
-          <Component {...pageProps} />
+          <UserCredProvider.Provider value={[userData, setUserData]}>
+            {loader ? <Loading /> : null}
+            {reply ? <PopUp reply={reply} changeState={setReply} /> : null}
+            <Navbar />
+            <Component {...pageProps} />
+          </UserCredProvider.Provider>
         </ReplyProvider.Provider>
       </NavBarProvider.Provider>
     </LoaderProvider.Provider>

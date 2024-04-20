@@ -9,10 +9,13 @@ import {
   faCaretRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { VerifiedLogo } from "./smallComponents";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { defaultImage } from "./smallComponents";
 import style from "/styles/blog.module.css";
 import { useRouter } from "next/router";
+import CommentBox from "./commentBox";
+import { UserCredProvider, ReplyProvider } from "@/pages/_app";
+
 export default function SinglePost({ data }) {
   const navi = useRouter();
   const postImage = data.photoUrl;
@@ -21,10 +24,13 @@ export default function SinglePost({ data }) {
   const totalLength = postImage.length;
   const profile = data.profileUrl;
   const { postName } = data;
+  const [reply, setReply] = useContext(ReplyProvider);
   const [arrowDecide, setArrowDecide] = useState(
     totalLength > 1 ? true : false
   );
-
+  const [commentData, setCommentData] = useState([]);
+  const [userData, setUserData] = useContext(UserCredProvider);
+  const parsedUserData = JSON.parse(userData);
   const gotoPost = () => {
     navi.push(`/posts/${postName}`);
   };
@@ -124,13 +130,13 @@ export default function SinglePost({ data }) {
         <span className={style.comments}>view all comments</span>
         <span className={style.posting_time}>2 hours ago</span>
       </div>
-      <div className={style.add_comment}>
-        <div className={style.left_side}>
-          <input type="text" placeholder="Add comment" />
-        </div>
-        <div className={style.right_side}>
-          <button>post</button>
-        </div>
+      <div>
+        <CommentBox
+          commentData={commentData}
+          post_id={postName}
+          userData={parsedUserData}
+          setReply={setReply}
+        />
       </div>
     </div>
   );
