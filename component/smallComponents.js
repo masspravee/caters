@@ -14,12 +14,12 @@ export const VerifiedLogo = () => {
 
 export const getPostTime = () => {
   const time = new Date();
-  const modifiedTime = moment(time).format("DD-MM-yyyy hh:mm a");
+  const modifiedTime = moment(time).format("DD-MM-YYYY hh:mm a");
   return modifiedTime;
 };
 
 export const TimeSetter = (date) => {
-  const formattedDate = moment(date, "DD-MM-YYYY hh:mm-A").fromNow();
+  const formattedDate = moment(date, "DD-MM-YYYY hh:mm a").fromNow();
   //console.log(formattedDate);
   return formattedDate;
 };

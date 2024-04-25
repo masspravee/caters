@@ -1,17 +1,16 @@
 import style from "/styles/comments.module.css";
 import React, { useState, useRef } from "react";
-import SendData from "./sendData";
+import SendData from "../sendData";
 import { v4 } from "uuid";
-import { getPostTime } from "./smallComponents";
+import { getPostTime } from "../smallComponents";
 
 export default function CommentBox({
-  commentData,
   setReply,
   userData,
   post_id,
+  setCommentData,
 }) {
   const [comment, setComment] = useState([]);
-
   const commentArea = useRef();
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [height, setHeight] = useState("auto");
@@ -24,9 +23,9 @@ export default function CommentBox({
       comment_id: v4(),
       comment_user: userData ? userData.username : "anonymous",
       comment_time: getPostTime(),
-      hasChildren: [],
+      hasReplies: [],
     };
-    //changeComment((prev) => [...prev, data]);
+    setCommentData((prev) => [...prev, data]);
     const response = await SendData("/post_action/add_comment", data);
     if (response.message) {
       commentArea.current.value = "";
@@ -63,20 +62,6 @@ export default function CommentBox({
       <span className={style.toggler} onClick={handleToggler}>
         Show Comments
       </span>
-      <div
-        className={
-          showCommentBox ? style.comment_list_show : style.comment_list
-        }
-      >
-        {commentData.map((ele, index) => (
-          <CommentList
-            commentData={ele}
-            key={index}
-            userData={userData}
-            setNotify={setNotify}
-          />
-        ))}
-      </div>
     </div>
   );
 }

@@ -12,10 +12,11 @@ import { VerifiedLogo } from "./smallComponents";
 import React, { useState, useContext, useEffect } from "react";
 import { defaultImage } from "./smallComponents";
 import style from "/styles/blog.module.css";
+
 import { useRouter } from "next/router";
-import CommentBox from "./commentBox";
+
 import { UserCredProvider, ReplyProvider } from "@/pages/_app";
-import { CommentList } from "./commentComponents";
+import MainComment from "./comments/mainComment";
 import SendData from "./sendData";
 
 export default function SinglePost({ data }) {
@@ -30,11 +31,10 @@ export default function SinglePost({ data }) {
   const [arrowDecide, setArrowDecide] = useState(
     totalLength > 1 ? true : false
   );
-  const [commentData, setCommentData] = useState([]);
+
   const [userData, setUserData] = useContext(UserCredProvider);
   const parsedUserData = JSON.parse(userData);
-  const [showComment, setShowComment] = useState(false);
-  const [commentFetching, setCommentFetching] = useState([]);
+
   const gotoPost = () => {
     navi.push(`/posts/${postName}`);
   };
@@ -64,18 +64,6 @@ export default function SinglePost({ data }) {
         setCurrentImage(postImage[totalLength - 1]);
         return totalLength - 1;
       });
-    }
-  };
-
-  const fetchComments = async function () {
-    var data = {
-      post_name: postName,
-    };
-    const response = await SendData("post_action/fetch_comments", data);
-
-    if (response.authType === 200) {
-      console.log(response);
-      setCommentFetching(response.comment);
     }
   };
 
@@ -143,30 +131,14 @@ export default function SinglePost({ data }) {
           <span className={style.caption}> {data.caption}</span>
         </p>
 
-        <span className={style.comments} onClick={fetchComments}>
-          view all comments
-        </span>
         <span className={style.posting_time}>2 hours ago</span>
       </div>
       <div>
-        <CommentBox
-          commentData={commentData}
-          post_id={postName}
+        <MainComment
           userData={parsedUserData}
+          post_id={postName}
           setReply={setReply}
         />
-      </div>
-      <div>
-        {commentFetching.map((ele) => {
-          return (
-            <CommentList
-              commentData={ele}
-              userData={userData}
-              post_name={postName}
-              setReply={setReply}
-            />
-          );
-        })}
       </div>
     </div>
   );

@@ -3,22 +3,22 @@
   margin: auto;
 }
 
-.comment .commentBox {
+ .commentBox {
   border: 1px solid black;
   margin: 1rem 0;
 }
 
-.comment .commentBox span {
+ .commentBox span {
   margin: 1rem;
   display: block;
 }
 
-.comment .toggler {
+ .toggler {
   margin: 1rem;
   display: none;
 }
 
-.comment .commentBox textarea {
+ .commentBox textarea {
   width: 90%;
   display: block;
   margin: auto;
@@ -29,23 +29,23 @@
   border-bottom: 1px solid black;
 }
 
-.comment .commentBox textarea:focus {
+ .commentBox textarea:focus {
   border: none;
   border-bottom: 1px solid blue;
 }
 
-.comment .commentBox button {
+ .commentBox button {
   margin: 1rem 2rem;
   height: 40px;
   width: 100px;
   background-color: skyblue;
 }
 
-.comment .comment_list_show {
+ .comment_list_show {
   display: block;
 }
 
-.comment .comment_list,
+ .comment_list,
 .comment_list_show {
   display: flex;
   flex-direction: column;
@@ -53,7 +53,7 @@
   margin: 1rem 0;
 }
 
-.comment .comment_list .comment_item,
+ .comment_list .comment_item,
 .comment_list_show .comment_item {
   display: flex;
   flex-direction: column;
@@ -108,11 +108,11 @@
 /*sidebar*/
 
 @media (max-width: 1000px) {
-  .comment .comment_list {
+   .comment_list {
     display: none;
   }
 
-  .comment .toggler {
+   .toggler {
     display: block;
     cursor: pointer;
   }
