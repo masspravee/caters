@@ -25,7 +25,7 @@ export default async function Login(req, res) {
         res,
         maxAge: new Date(Date.now() + 900000),
         httpOnly: false,
-        sameSite: "none",
+        sameSite: "None",
         secure: "true",
       });
 
