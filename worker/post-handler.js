@@ -5,8 +5,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { firestore } from "@/config";
 
 export const tester = inngestClient.createFunction(
-  { id: "post-handler" },
-  { event: "post-handler" },
+  { id: "post-handler", name: "create blog post" },
+  { event: "test/post-handler" },
   async ({ event, step }) => {
     var { info, files } = event.data;
 

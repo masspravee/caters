@@ -41,9 +41,7 @@ const post = async (req, res) => {
       };
 
       inngestClient.send({
-        name: "post-handler",
-        id: "post-handler",
-
+        name: "test/post-handler",
         data: { info, files },
       });
       res.json({ message: "post uploading...", authType: 200 });
