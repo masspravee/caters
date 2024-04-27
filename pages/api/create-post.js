@@ -1,12 +1,9 @@
 import { IncomingForm } from "formidable";
 import uploadImage from "@/component/uploadImage";
-import queue from "@/component/qurrelQuene";
-import Bull from "bull";
-const Queue = new Bull("first-queue");
-
 import moment from "moment";
+import { inngestClient } from "@/worker/workLoad";
 
-import { doc, setDoc, getDoc } from "firebase/firestore";
+const fs = require("fs");
 
 export const config = {
   api: {
@@ -23,28 +20,18 @@ export default async function (req, res) {
   }
 }
 
-const timer = () => {
-  var timerId = new Date().getTime();
-  return timerId;
-};
-
-const setDate = () => {
-  var nowDate = new Date();
-  var newDate = moment(nowDate).format("h:mm A D-MMM-yy");
-  return newDate;
-};
-
 const post = async (req, res) => {
   const form = new IncomingForm();
   try {
     form.parse(req, async (err, fields, files) => {
+      console.log(files);
       var urls = [];
       var postName = `${catersProfId}-${timer()}`;
       var filesKey = Object.keys(files);
       var caption = fields.caption[0];
       var username = fields.username[0];
 
-      var data = {
+      var info = {
         postName: postName,
         caption: caption,
         photoUrl: [],
@@ -53,11 +40,13 @@ const post = async (req, res) => {
         time: setDate(),
       };
 
-      queue.add(data);
+      inngestClient.send({
+        name: "post-handler",
+        id: "post-handler",
 
-      if (filesKey && caption && username) {
-        //   res.json({ message: "success" });
-      }
+        data: { info, files },
+      });
+      res.json({ message: "post uploading...", authType: 200 });
     });
   } catch (err) {
     console.log(err);
@@ -65,34 +54,13 @@ const post = async (req, res) => {
   }
 };
 
-/**
-const promiseUrl = filesKey.map(async (file, index) => {
-        var singleUrl = await saveFile(files[file][0]);
+const timer = () => {
+  var timerId = new Date().getTime();
+  return timerId;
+};
 
-        return singleUrl;
-      });
-
-      var resolvedUrl = await Promise.all(promiseUrl);
-
-      var data = {
-        postName: postName,
-        caption: caption,
-        photoUrl: resolvedUrl,
-        username: username,
-        uid: catersProfId,
-        time: setDate(),
-      };
-
-      await setDoc(doc(firestore, "post", postName), data);
-
-* 
- * 
- * 
- * 
- * async function saveFile(file) {
-  const data = fs.readFileSync(file.filepath);
-  var newFileName = `${catersProfId}-${timer()}`;
-  var imageUrl = await uploadImage(data, "/post", newFileName);
-  return imageUrl;
-}
- */
+const setDate = () => {
+  var nowDate = new Date();
+  var newDate = moment(nowDate).format("DD-MM-YYYY hh:mm a");
+  return newDate;
+};

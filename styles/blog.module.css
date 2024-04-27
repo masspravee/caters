@@ -15,12 +15,20 @@
 .inner .sideBar , .inner  .suggested{
   width: 30%;
   min-height: 100%;
-  background-color: skyblue;
+
 }
 
 .inner  .suggested{
-  background-color: rgb(190, 41, 41) ;
+  border-left: 1px solid gray;
+
 }
+
+.inner  .suggested h3{
+text-align: center;
+margin-top: 1rem;
+
+}
+
 
 .inner  .suggested a{
 display: block;
@@ -28,6 +36,7 @@ text-decoration: none;
 color: black;
 padding: 10px;
 cursor: pointer;
+margin-left: 2rem;
 }
 
 .inner  .suggested a::before , .displayName::before{
@@ -35,7 +44,7 @@ cursor: pointer;
 }
 
 .inner .blog {
-  background-color: gray;
+
   position: relative;
   width: 70%;
   min-height: 100%;

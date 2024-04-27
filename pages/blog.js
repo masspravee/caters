@@ -18,7 +18,6 @@ export default function Blog({ data }) {
         </div>
         <div className={style.blog}>
           <div className={style.post_wrapper}>
-            <h1>Blog</h1>
             {response
               ? response.map((value, index) => {
                   return <SinglePost data={value} key={index} />;

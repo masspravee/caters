@@ -5,7 +5,6 @@ min-height: 100%;
 
 
 .sideBar h2{
-    
     text-align: center;
     line-height: 50px;
 }
@@ -14,8 +13,10 @@ min-height: 100%;
     display: block;
     margin: auto;
     height: 40px;
-    width: 70%;
+    width: 90%;
+    padding-left: 0.5rem;
     font-size: 20px;
+
 }
 
 .sideBar ul > li{
@@ -31,6 +32,7 @@ min-height: 100%;
 .sideBar li{
     display: block;
     margin: auto;
-    width: 70%;
+    width: 90%;
+   line-height: 35px;
 
 }

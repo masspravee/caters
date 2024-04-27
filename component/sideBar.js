@@ -8,7 +8,7 @@ export default function SideBar({ data }) {
     .map((single) => {
       return single != undefined ? single : "";
     });
-  console.log(userNames);
+
   const [search, setSearch] = useState(null);
   const [results, setResults] = useState(null);
 
@@ -30,10 +30,9 @@ export default function SideBar({ data }) {
   return (
     <>
       <div className={style.sideBar}>
-        <h1>Hello World</h1>
         <div className={style.search}>
           <h2>Search Providers</h2>
-          <input onChange={handleSearch}></input>
+          <input onChange={handleSearch} placeholder="Search"></input>
           <ul className={style.results}>
             {!results
               ? null

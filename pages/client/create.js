@@ -81,8 +81,8 @@ export default function CreatePost() {
         false
       );
       setLoader(false);
-      if (res.message == "success") {
-        setReply("post Created Successfully");
+      if (res.authType == 200) {
+        setReply(res.message);
         console.log(res);
         navi.push("/blog");
       } else {
