@@ -8,4 +8,5 @@ export default serve({
   client: inngestClient,
   functions: [tester],
   streaming: "allow",
+  signingKey: process.env.INNGEST_SIGNING_KEY,
 });
