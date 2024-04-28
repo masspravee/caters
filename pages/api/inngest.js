@@ -4,7 +4,8 @@ import { tester } from "@/worker/post-handler";
 
 // Create a client to send and receive events
 
-export const { GET, POST, PUT } = serve(inngestClient, [tester], {
-  streaming: "allow",
+export const { GET, POST, PUT } = serve({
+  client: inngestClient,
+  functions: [tester],
   signingKey: process.env.INNGEST_SIGNING_KEY,
 });
