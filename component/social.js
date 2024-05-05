@@ -1,4 +1,4 @@
-import loginMethod from "./method";
+import loginMethod from "./auth/googlePopupLogin";
 import style from "/styles/login.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";

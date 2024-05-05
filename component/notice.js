@@ -9,6 +9,7 @@ export default function Notice({ title, msg }) {
         </div>
         <div className={style.content}>
           <span> {msg}</span>
+          <button>CLick</button>
         </div>
       </div>
     </div>

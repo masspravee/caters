@@ -1,12 +1,12 @@
 import style from "/styles/new.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import SendData from "./sendData";
+import SendData from "../sendData";
 import React, { useContext, useState } from "react";
-import loginMethod from "./method";
+import GoogleLogin from "./googlePopupLogin";
 import { LoaderProvider, ReplyProvider } from "@/pages/_app";
 
-export default function LoginBox({ changeState, responseState, response }) {
+export default function LoginBox({ responseState }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [loader, setLoader] = useContext(LoaderProvider);
@@ -27,32 +27,15 @@ export default function LoginBox({ changeState, responseState, response }) {
     }
   };
 
-  const handleState = () => {
-    changeState((prev) => !prev);
-  };
-
   return (
     <div className={style.login}>
       <div className={style.inner_loginbox}>
         <header>
           <div className={style.header}>
             <span className={style.firstSpan}>Login</span>
-            <span className={style.secondSpan}>/</span>
-            <span className={style.secondSpanWord} onClick={handleState}>
-              SignUp
-            </span>
           </div>
         </header>
         <div className={style.inner_content}>
-          <div className={style.social}>
-            <FontAwesomeIcon
-              className={style.icon}
-              icon={faGoogle}
-              onClick={() => loginMethod("google", responseState)}
-            />
-            <FontAwesomeIcon className={style.icon} icon={faFacebookF} />
-          </div>
-
           <form className={style.input_container} onSubmit={handler}>
             <input
               placeholder="enter email"
@@ -72,6 +55,14 @@ export default function LoginBox({ changeState, responseState, response }) {
               <button>login</button>
             </div>
           </form>
+          <FontAwesomeIcon
+            className={style.icon}
+            icon={faGoogle}
+            onClick={() => GoogleLogin(responseState)}
+          />
+          <span>
+            Don't have a Account <a href="/account_type">Sign up</a>
+          </span>
         </div>
       </div>
     </div>

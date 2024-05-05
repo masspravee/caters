@@ -21,7 +21,8 @@
   box-shadow: black 2px 2px 10px;
 }
 
-.card h1 , .card h2 {
+.card h1,
+.card h2 {
   text-transform: none;
   text-align: center;
   padding: 10px 0;
@@ -37,9 +38,7 @@
   margin: auto;
 }
 
-
-
-.hideImage{
+.hideImage {
   display: none;
   color: white;
 }
@@ -66,8 +65,7 @@
   margin-top: 0.5rem;
 }
 
-
-.data_container .username{
+.data_container .username {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,7 +75,6 @@
   font-weight: 600;
   text-transform: none;
 }
-
 
 .data {
   padding: 10px;
@@ -127,4 +124,112 @@
   .card {
     width: 80vw;
   }
+}
+
+/* account type */
+
+.account_container {
+  height: 100%;
+  min-height: 70vh;
+  display: flex;
+  width: 80%;
+  margin: auto;
+  margin-top: 5rem;
+  gap: 3rem;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.account_container section {
+  margin: 2rem;
+  width: 35%;
+}
+
+.account_container section header{
+  height: 20%;
+
+}
+
+
+.account_container section span{
+  line-height: 28px;
+  font-size: 18px;
+  margin-bottom: 2rem;
+  display: block;
+  font-weight: 600;
+}
+
+.account_container section p{
+  line-height: 25px;
+}
+
+
+
+.account_container article {
+  flex: 1;
+  margin: 2rem;
+  margin-top: 3rem;
+}
+
+
+.account_container article header{
+  margin-bottom: 1.5rem;
+}
+
+.account_container article header h1{
+  line-height: 50px;
+}
+
+
+.account_container article header p{
+  line-height: 28px;
+
+}
+
+.account_container article header p span{
+ color: red;
+
+}
+
+
+.account_container article .selection_box , .checked_box {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 70%;
+  border-radius: 4px;
+  margin: 1rem 0 0.5rem 0;
+  background-color: rgba(234, 240, 234, 0.479);
+  cursor: pointer;
+}
+
+
+.account_container article .selection_box span , .checked_box span{
+  margin-left: 1rem;
+}
+
+.checked_box{
+  background-color: lightgreen;
+}
+
+.account_container article input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.account_container article label{
+  width: 100%;
+  line-height: 40px;
+  margin-left: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+
+.account_container article  button{
+ margin-top: 1rem;
 }

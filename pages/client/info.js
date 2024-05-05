@@ -3,18 +3,23 @@ import React, { useContext, useState } from "react";
 import SendData from "@/component/sendData";
 import { useRouter } from "next/router";
 import { LoaderProvider, ReplyProvider } from "../_app";
-export default function Info() {
+export default function Info({ data }) {
   const navi = useRouter();
-  const [username, setUsername] = useState(null);
-  const [bio, setBio] = useState(null);
+
+  const [userNameData, setUserNameData] = useState(data);
+  const [username, setUsername] = useState("");
+
   const [loader, setLoader] = useContext(LoaderProvider);
   const [reply, setReply] = useContext(ReplyProvider);
+
+  const clickValueHandler = (event) => {
+    setUsername(event.target.value);
+  };
 
   const submitValue = async (event) => {
     event.preventDefault();
     const data = {
       username: username,
-      bio: bio,
     };
     if (EvaluateUsername(username)) {
       setLoader(true);
@@ -50,17 +55,23 @@ export default function Info() {
               }}
               name="username"
               minLength={6}
+              value={username}
               required
             ></input>
+            <div>
+              <span>Suggested Usernames for you</span>
+              <select size={5} onChange={clickValueHandler}>
+                {userNameData.map((item, index) => {
+                  return (
+                    <option value={item} key={index}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
-          <div className={style.input_group}>
-            <label>Set Your Bio</label>
-            <input
-              onChange={(e) => setBio(e.target.value)}
-              name="bio"
-              required
-            ></input>
-          </div>
+
           <div className={style.input_group}>
             <input type="submit" value={"Submit"}></input>
           </div>
@@ -68,4 +79,25 @@ export default function Info() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { catersProfId } = context.req.cookies;
+  console.log(catersProfId);
+
+  const data = JSON.stringify({ uid: catersProfId });
+
+  const apiUrl =
+    process.env.NODE_ENV === "production"
+      ? `https://caters.vercel.app/api/account_action/username_suggesion`
+      : "http://localhost:3000/api/account_action/username_suggesion";
+  const response = await fetch(apiUrl, {
+    method: "POST",
+    body: data,
+  });
+  const res = await response.json();
+
+  return {
+    props: { data: res.message },
+  };
 }

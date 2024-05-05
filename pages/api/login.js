@@ -30,12 +30,12 @@ export default async function Login(req, res) {
       });
 
       res.json({
-        authType: "login200",
+        authType: 200,
         message: "Login Successful",
         data: docData,
       });
     })
     .catch((error) => {
-      res.json({ error: error.code });
+      res.json({ authType: 400, error: error.code });
     });
 }

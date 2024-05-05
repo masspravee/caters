@@ -1,18 +1,18 @@
 import style from "/styles/new.module.css";
-import loginMethod from "./method";
+import loginMethod from "./googlePopupLogin";
 import React, { useState, useEffect, useContext } from "react";
-import Notice from "./notice";
-import SendData from "./sendData";
+import Notice from "../notice";
+import SendData from "../sendData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { LoaderProvider, ReplyProvider } from "@/pages/_app";
-export default function SignUpBox({ response, responseState, client = true }) {
+export default function SignUpBox({ responseState, user_type }) {
   const [userCred, setUserCred] = useState({
     displayName: "",
     email: "",
     password: "",
     retype: "",
-    client: client,
+    client: user_type == "client" ? true : false,
   });
 
   const [loader, setLoader] = useContext(LoaderProvider);
@@ -54,10 +54,6 @@ export default function SignUpBox({ response, responseState, client = true }) {
     setUserCred((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleState = () => {
-    changeState((prev) => !prev);
-  };
-
   return (
     <div className={style.login}>
       <div className={style.inner_loginbox}>
@@ -66,22 +62,12 @@ export default function SignUpBox({ response, responseState, client = true }) {
             <span className={style.firstSpan}>SignUp</span>
           </div>
           <div>
-            <h3 className={style.errorMsg}>
-              {response.message ? response.message : ""}
-            </h3>
+            <h3 className={style.errorMsg}></h3>
           </div>
         </header>
         <div className={style.inner_content}>
-          <div className={style.social}>
-            <FontAwesomeIcon
-              className={style.icon}
-              icon={faGoogle}
-              onClick={() => loginMethod("google", responseState)}
-            />
-            <FontAwesomeIcon className={style.icon} icon={faFacebookF} />
-          </div>
           <div>
-            <span className={style.idea}>or create account with email</span>
+            <span className={style.idea}>Create account with email</span>
           </div>
           <form className={style.input_container} onSubmit={handler}>
             <input
@@ -118,6 +104,13 @@ export default function SignUpBox({ response, responseState, client = true }) {
               <button type="submit">SignIn</button>
             </div>
           </form>
+          <div className={style.social}>
+            <FontAwesomeIcon
+              className={style.icon}
+              icon={faGoogle}
+              onClick={() => loginMethod("google", responseState, user_type)}
+            />
+          </div>
         </div>
       </div>
     </div>

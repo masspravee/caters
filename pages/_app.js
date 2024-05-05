@@ -35,7 +35,6 @@ export default function App({ Component, pageProps }) {
             { route: "/blog", textName: "blog" },
             { route: "/search", textName: "search" },
             { route: "/about", textName: "about" },
-
             { route: "/account", textName: "account" },
           ]);
         }
@@ -45,7 +44,7 @@ export default function App({ Component, pageProps }) {
         setDirs([
           { route: "/blog", textName: "blog" },
           { route: "/about", textName: "about" },
-          { route: "/welcome", textName: "welcome" },
+          { route: "/account_type", textName: "signup" },
           { route: "/login", textName: "login" },
         ]);
       }

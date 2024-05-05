@@ -7,6 +7,8 @@ import {
   signInWithPhoneNumber,
 } from "firebase/auth";
 import { setCookie } from "cookies-next";
+import { generateUsername } from "unique-username-generator";
+
 export default async (req, res) => {
   const auth = getAuth(app);
   const data = JSON.parse(req.body);
@@ -15,6 +17,9 @@ export default async (req, res) => {
     console.log(data);
     const { email, password, displayName, client } = data;
     console.log(data);
+    var emailName = email.split("@")[0];
+
+    var newUsername = generateUsername("-", 5, 20, emailName);
     await createUserWithEmailAndPassword(auth, email, password)
       .then(async (cred) => {
         var { uid } = cred.user;
@@ -26,7 +31,7 @@ export default async (req, res) => {
           photoUrl: "",
           phone: "",
           bio: "",
-          username: "",
+          username: newUsername,
         };
         if (client) {
           reDefinedData.isVerified = false;
@@ -52,7 +57,7 @@ export default async (req, res) => {
           secure: "true",
         });
         res.json({
-          authType: "acc200",
+          authType: 200,
           client: client,
           message: "Account Created",
           data: reDefinedData,
