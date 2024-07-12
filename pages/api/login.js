@@ -20,12 +20,12 @@ export default async function Login(req, res) {
       } catch (e) {
         console.log(e);
       }
-      setCookie("catersProfId", uid, {
+      setCookie(docData.client ? "catersClientId" : "catersPersonID", uid, {
         req,
         res,
         maxAge: new Date(Date.now() + 900000),
         httpOnly: false,
-        sameSite: "None",
+        sameSite: "none",
         secure: "true",
       });
 

@@ -2,7 +2,8 @@ import { firestore } from "@/config";
 import { doc, updateDoc, getDocs, collection } from "firebase/firestore";
 
 export default async function (req, res) {
-  const { catersProfId, caterClient } = req.cookies;
+  const cookies = req.cookies;
+  const userId = cookies.catersClientId ? catersClientId : catersPersonID;
   const { username, bio } = JSON.parse(req.body);
   console.log(username, bio);
   const users = collection(firestore, "users");
@@ -16,7 +17,7 @@ export default async function (req, res) {
     }
   });
 
-  updateDoc(doc(firestore, "users", catersProfId), {
+  updateDoc(doc(firestore, "users", userId), {
     username: username,
     bio: bio,
   }).then(() => {

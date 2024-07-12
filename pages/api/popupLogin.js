@@ -10,7 +10,7 @@ export default async (req, res) => {
     var snap = await getDoc(fileInFirestore);
     var userData = snap.data();
     if (snap.exists()) {
-      setCookie("catersProfId", uid, {
+      setCookie(data.client ? "catersClientId" : "catersPersonID", uid, {
         req,
         res,
         maxAge: new Date(Date.now() + 900000),
@@ -35,7 +35,7 @@ export default async (req, res) => {
         await setDoc(doc(firestore, "users", uid), data);
       }
 
-      setCookie("catersProfId", uid, {
+      setCookie(data.client ? "catersClientId" : "catersPersonID", uid, {
         req,
         res,
         maxAge: new Date(Date.now() + 900000),

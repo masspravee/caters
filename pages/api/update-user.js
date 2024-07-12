@@ -12,7 +12,7 @@ export default async (req, res) => {
 
     if (document !== userData) {
       await updateDoc(doc(firestore, "users", uid), userData).then(() => {
-        res.json({ message: "changes made" });
+        res.json({ authType: 200, message: "changes made" });
       });
     }
   } catch (err) {

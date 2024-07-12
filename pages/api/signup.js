@@ -40,7 +40,7 @@ export default async (req, res) => {
 
         await setDoc(doc(firestore, "users", uid), reDefinedData);
 
-        setCookie("catersProfId", uid, {
+        setCookie(client ? "catersClientId" : "catersPersonID", uid, {
           req,
           res,
           maxAge: new Date(Date.now() + 900000),
@@ -48,14 +48,7 @@ export default async (req, res) => {
           sameSite: "none",
           secure: "true",
         });
-        setCookie("caterClient", client, {
-          req,
-          res,
-          maxAge: new Date(Date.now() + 900000),
-          httpOnly: false,
-          sameSite: "none",
-          secure: "true",
-        });
+
         res.json({
           authType: 200,
           client: client,

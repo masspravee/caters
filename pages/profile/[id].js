@@ -17,6 +17,7 @@ export default function Profile({ userData, userPosts, sideBarData }) {
             <div className={style.account}>
               <div className={style.left}>
                 <img
+                  className={style.profileImage}
                   src={
                     userDetails.photoUrl
                       ? userDetails.photoUrl
@@ -32,14 +33,16 @@ export default function Profile({ userData, userPosts, sideBarData }) {
                     </span>
                     {userDetails.isVerified ? <VerifiedLogo /> : null}
                   </div>
-                  <button>Follow</button>
                 </div>
                 <div className={style.infos}>
                   <h3>{userDetails.displayName}</h3>
                   <span className={style.userposts}>
-                    {userPosts.length + " "}posts
+                    {userPosts.length}
+                    <label>posts</label>
                   </span>
-                  <span className={style.follow}>10 following</span>
+                  <span className={style.followers}>
+                    10<label>following</label>{" "}
+                  </span>
                 </div>
 
                 <div className={style.contact}>
@@ -56,8 +59,10 @@ export default function Profile({ userData, userPosts, sideBarData }) {
                     </span>
                   </span>
                 </div>
+                <button className={style.follow}>+ Follow</button>
               </div>
             </div>
+
             <ul className={style.posts}>
               {userPosts.map((post, index) => {
                 return (
@@ -69,7 +74,6 @@ export default function Profile({ userData, userPosts, sideBarData }) {
             </ul>
           </div>
         </div>
-        <div className={style.sideBar}></div>
       </div>
     </div>
   );

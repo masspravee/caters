@@ -13,8 +13,9 @@ export const config = {
 
 export default async function (req, res) {
   if (req.method === "POST") {
-    const { catersProfId } = req.cookies;
-    post(req, res, catersProfId);
+    const cookies = req.cookies;
+    const userId = cookies.catersClientId ? catersClientId : catersPersonID;
+    post(req, res, userId);
   }
 }
 
